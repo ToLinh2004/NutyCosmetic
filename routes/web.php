@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
@@ -32,3 +35,9 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/order', [OrderController::class,'index'])->name('orders');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 });
+
+Route::get('/home',[ProductController::class,'index'])->name('home');
+
+Route::get('/product',[ProductController::class,'getAllProduct'])->name('all-product');
+Route::get('/product-face',[ProductController::class,'productFace'])->name('product-face');
+Route::get('/product-hair',[ProductController::class,'productHair'])->name('product-hair');
