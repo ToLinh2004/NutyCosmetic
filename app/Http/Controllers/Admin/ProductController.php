@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Orders;
+namespace App\Http\Controllers\Admin;
+use App\Models\Admin\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+
+class ProductController extends Controller
 {
-    private $orders;
+    private $products;
     public function __construct()
     {
-        $this->orders = new Orders;
+        $this->products = new Products;
     }
-    
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $orders = $this -> orders -> getAllOrder();
-        return view('Admin.Orders.AdminOrder', ['orders' => $orders]);
+        $productList = $this->products->getAllProduct();
+        return view('Admin.Products.AdminProduct', compact('productList'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Users;
+namespace App\Http\Controllers\Admin;
+use App\Models\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

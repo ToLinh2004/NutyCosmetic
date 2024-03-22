@@ -1,5 +1,7 @@
 @extends('layouts.masterLayoutAdmin')
-
+@section('titles')
+    Homepage
+@endsection
 @section('card')
     <div class="label mt-4 p-4">
         <div class="row justify-content-center">
@@ -32,7 +34,7 @@
             <div class="col-5">
                 <div class="rectangle rounded bg-info.bg-gradient text-white border border-success-subtle">
                     <strong style="font-size: 18px">
-                        <p>Type Of Products</p>
+                        <p>Categories</p>
                     </strong>
                     <h3>Total: </h3>
                 </div>

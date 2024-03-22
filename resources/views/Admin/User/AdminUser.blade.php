@@ -1,4 +1,7 @@
 @extends('layouts.masterLayoutAdmin')
+@section('titles')
+    User
+@endsection
 @section('card')
     <div>
     @section('title')

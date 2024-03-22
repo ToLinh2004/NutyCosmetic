@@ -1,11 +1,14 @@
 @extends('layouts.masterLayoutAdmin')
+@section('titles')
+    Product
+@endsection
 @section('card')
     <div>
     @section('title')
         <h1 class="text-center title">PRODUCTS</h1>
     @endsection
 
-    <div class="buttonAddProduc">
+    <div class="buttonAddProduct">
         <button type="submit" class="btn btn-success mx-3">
             Add Product
             <i class="fa fa-plus"></i>
@@ -21,6 +24,7 @@
                     <th scope="col" style="width:10%">Image</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -34,6 +38,7 @@
                             <td><img src="{{ $item->image_url }}" style="width:100px" alt=""></td>
                             <td>{{ $item->quantity }}</td>
                             <td>{{ $item->price }}</td>
+                            <td>{{ $item->category }}</td>
                             <td>
                                 <div class="d-flex">
                                     <a href="" class="mx-3 btn btn-warning btn-sm">Edit</a>
