@@ -1,0 +1,72 @@
+.container-fluid {
+    background-color: #f9faff;
+    height: 100%;
+}
+/* Css for sidebar */
+.sidebar {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #f9faff;
+    color: #111;
+}
+.sidebar img {
+    background: white;
+}
+/* Css for navbar */
+.navbar {
+    background: white;
+    height: 100px;
+}
+.search .form-control {
+    width: 400px;
+    text-align: center;
+    background-color: #f9faff;
+}
+.avatar img {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+}
+
+.rectangle {
+    background-color: lightgray;
+    height: 140px;
+    padding: 10px;
+}
+
+.title {
+    color: red;
+    animation: myAnimation 5s infinite;
+}
+
+@keyframes myAnimation {
+    0% {
+        color: red;
+    }
+
+    25% {
+        color: yellow;
+    }
+
+    50% {
+        color: blue;
+    }
+
+    100% {
+        color: green;
+    }
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    cursor: pointer;
+}
+.full-text {
+    white-space: normal;
+    max-width: none;
+}

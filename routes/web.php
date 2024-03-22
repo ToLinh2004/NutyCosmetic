@@ -1,7 +1,9 @@
 <?php
-
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('Admin.Adminhomepage');
+    })->name('Homepage');
+    Route::get('/user', [UserController::class, 'index'] )->name('user');
+    Route::get('/product', [ProductController::class,'index'])->name('products');
+    Route::get('/order', [OrderController::class,'index'])->name('orders');
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 });
