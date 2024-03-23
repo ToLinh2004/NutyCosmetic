@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,52 +18,115 @@ class UserController extends Controller
         $userList = $this->users->getAllUser();
         return view('Admin.User.AdminUser', compact('userList'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('Admin.User.AdminAddUser');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'user_name' => 'required|min:5',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'phone' => 'digits:10',
+                'address' => 'string',
+                'image' => 'required|mimes:jpg,jpeg,png'
+            ],
+            [
+                'user_name.required' => 'Username is required.',
+                'user_name.min' => 'Username must be at least :min characters.',
+                'email.required' => 'Email is required.',
+                'email.email' => 'Email must be a valid email address.',
+                'email.unique' => 'Email has already been taken.',
+                'password.required' => 'Password is required.',
+                'password.string' => 'Password must be a string.',
+                'password.min' => 'Password must be at least :min characters.',
+                'password.regex' => 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
+                'phone.digits' => 'Phone must be exactly :digits digits.',
+                'address.string' => 'Address must be a string.',
+                'image.required' => 'Please choose an image file.',
+                'image.mimes' => 'The image file must be in jpg, jpeg, or png format.',
+            ]
+        );
+        $imageName = time() . '.' . $request->image->extension();
+        $dataInsert = [
+            $request->user_name,
+            $request->email,
+            $request->phone,
+            $request->password,
+            $request->address,
+            $request->image->move('images', $imageName)
+        ];
+        $this->users->addUser($dataInsert);
+        return redirect()->route('admin.user')->with('msg', 'User created successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        if (!empty($id)) {
+            $userDetail = $this->users->getDetail($id);
+            if (!empty($userDetail[0])) {
+                $request->session()->put('id', $id);
+                $userDetail = $userDetail[0];
+            } else {
+                return redirect()->route('users.index')->with('msgerror', 'The user does not exist');
+            }
+        } else {
+            return redirect()->route('users.index')->with('msgerror', 'The user does not exist');
+        }
+        return view('Admin.User.AdminEditUser', compact('userDetail'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request)
     {
-        //
+        $id = session('id');
+        if (empty($id)) {
+            return back()->with('msgerror', 'Link is not valid');
+        }
+        $request->validate(
+            [
+                'user_name' => 'required|min:5',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'phone' => 'digits:10',
+                'address' => 'string',
+                'image' => 'required|mimes:jpg,jpeg,png'
+            ],
+            [
+                'user_name.required' => 'Username is required.',
+                'user_name.min' => 'Username must be at least :min characters.',
+                'email.required' => 'Email is required.',
+                'email.email' => 'Email must be a valid email address.',
+                'email.unique' => 'Email has already been taken.',
+                'password.required' => 'Password is required.',
+                'password.string' => 'Password must be a string.',
+                'password.min' => 'Password must be at least :min characters.',
+                'password.regex' => 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
+                'phone.digits' => 'Phone must be exactly :digits digits.',
+                'address.string' => 'Address must be a string.',
+                'image.required' => 'Please choose an image file.',
+                'image.mimes' => 'The image file must be in jpg, jpeg, or png format.',
+            ]
+        );
+        $imageName = time() . '.' . $request->image->extension();
+        $dataUpdate = [
+            $request->user_name,
+            $request->email,
+            $request->phone,
+            $request->password,
+            $request->address,
+            $request->status,
+            $request->image->move('images', $imageName)
+        ];
+        $this->users->updateUser($dataUpdate, $id);
+        return redirect()->route('admin.user')->with('msg', 'Updated user successfully.');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $user = $this->users::findOrFail($id);
+        $user->status = 'inactive';
+        
+        $user->deleteUser($id); 
+        
+        return redirect()->route('admin.user')->with('msg', 'Deleted user successfully.');
     }
 }
