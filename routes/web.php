@@ -24,6 +24,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     })->name('Homepage');
     Route::get('/user', [UserController::class, 'index'] )->name('user');
     Route::get('/product', [ProductController::class,'index'])->name('products');
+    Route::get('/addproduct', [ProductController::class,'create'])->name('addproduct');
     Route::get('/order', [OrderController::class,'index'])->name('orders');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 });
