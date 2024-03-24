@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="image">Image:</label>
-                    <input type="file" class="form-control" name="image" placeholder="image" value="{{old('image') ?? $userDetail -> image }}">
+                    <input type="file" class="form-control" name="image" placeholder="image" value="{{old('image') ?? basename($userDetail -> image) }}">
                     @error('image')
                         <span style="color:red">{{$message}}</span>
                     @enderror
