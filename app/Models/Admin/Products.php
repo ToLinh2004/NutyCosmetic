@@ -17,6 +17,16 @@ class Products extends Model
         ->get();
         return($products);
     }
+    public function addProduct($data){
+        DB::insert('INSERT INTO products(product_name, description, price, image_name, image_url, quantity, category_id) VALUES (?, ?, ?, ?, ?, ?, ?)', $data);
+    }
+    public function updateProduct($data,$id){
+        $data[] =$id ;
+        return DB::update('UPDATE ' . $this->table . ' SET product_name=?, description=?, price=?, image_name=?, image_url=?, quantity=?, category_id=?, status=? WHERE id=?', $data);
+    }
+    public function deleteProduct($id){
+        return DB::update('UPDATE '.$this->table.' SET status = \'Inactive\' WHERE id = ?', [$id]);
+    }
     public function getAllProducts()
     {
         $productAll=Products::all();

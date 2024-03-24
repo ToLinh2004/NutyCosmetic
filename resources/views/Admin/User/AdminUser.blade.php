@@ -35,7 +35,7 @@
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->address }}</td>
-                            <td><img src="{{asset($item->image)  }}" style="width:100px;" alt="avatar"></td>
+                            <td><img src="{{asset($item->image)}}" style="width:100px;" alt="avatar"></td>
                             <td>{{ $item->status }}</td>
                             <td>
                                 <a href="{{route('admin.edituser', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
