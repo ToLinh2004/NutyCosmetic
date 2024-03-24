@@ -15,9 +15,4 @@ class Categories extends Model
         ->get();
         return($categories);
     }
-    public function getCategoryDetail($id)
-    {
-        $typeCategory=Categories::find($id); // tìm khóa chính
-        return $typeCategory;
-    }   
 }

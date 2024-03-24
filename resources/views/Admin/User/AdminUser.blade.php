@@ -12,6 +12,14 @@
     @if (session('msg'))
     <div class="alert alert-success">{{session('msg')}}</div>
     @endif
+    <div class="buttonAddUser">
+        <a href="{{route('admin.adduser')}}">
+            <button type="submit" class="btn btn-success mx-3">
+                Add User
+                <i class="fa fa-plus"></i>
+            </button>
+        </a>
+    </div>
     <div class="tableUser mt-5">
         <table class="table table-striped ">
             <thead>
@@ -35,7 +43,7 @@
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->address }}</td>
-                            <td><img src="{{asset($item->image)}}" style="width:100px;" alt="avatar"></td>
+                            <td><img src="{{asset($item->image)  }}" style="width:100px;" alt="avatar"></td>
                             <td>{{ $item->status }}</td>
                             <td>
                                 <a href="{{route('admin.edituser', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>

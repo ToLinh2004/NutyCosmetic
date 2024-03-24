@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use \App\Models\Admin\Categories;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -17,14 +17,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot()
+    public function boot(): void
     {
         //
-        view()->composer('*',function($view){
-            $view->with([
-                'category'=> Categories::all(),
-            ]);
-        });
-
     }
 }
