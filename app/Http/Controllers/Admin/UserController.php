@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public function create()
     {
-        return view('Admin.User.AdminAddUser');
+        return view('Admin.User.AddUser');
     }
     public function store(Request $request)
     {
@@ -74,7 +74,7 @@ class UserController extends Controller
         } else {
             return redirect()->route('users.index')->with('msgerror', 'The user does not exist');
         }
-        return view('Admin.User.AdminEditUser', compact('userDetail'));
+        return view('Admin.User.EditUser', compact('userDetail'));
     }
     public function update(Request $request)
     {
@@ -107,7 +107,14 @@ class UserController extends Controller
                 'image.mimes' => 'The image file must be in jpg, jpeg, or png format.',
             ]
         );
-        $imageName = time() . '.' . $request->image->extension();
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move('images', $imageName);
+            $imagePath = 'images/' . $imageName;
+        } else {
+            $oldUser = $this->users::find($id);
+            $imagePath = $oldUser->image;
+        }
         $dataUpdate = [
             $request->user_name,
             $request->email,
@@ -115,7 +122,7 @@ class UserController extends Controller
             $request->password,
             $request->address,
             $request->status,
-            $request->image->move('images', $imageName)
+            $imagePath
         ];
         $this->users->updateUser($dataUpdate, $id);
         return redirect()->route('admin.user')->with('msg', 'Updated user successfully.');
