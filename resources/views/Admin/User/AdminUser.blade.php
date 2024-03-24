@@ -12,14 +12,6 @@
     @if (session('msg'))
     <div class="alert alert-success">{{session('msg')}}</div>
     @endif
-    <div class="buttonAddUser">
-        <a href="{{route('admin.adduser')}}">
-            <button type="submit" class="btn btn-success mx-3">
-                Add User
-                <i class="fa fa-plus"></i>
-            </button>
-        </a>
-    </div>
     <div class="tableUser mt-5">
         <table class="table table-striped ">
             <thead>
