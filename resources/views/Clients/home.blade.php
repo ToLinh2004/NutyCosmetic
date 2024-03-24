@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterLayoutClient')
 @section('baner')
 <div id="banner">
     <div class="left-section">
@@ -87,4 +87,5 @@
         @break
         @endforeach
 </div>
+
 @endsection

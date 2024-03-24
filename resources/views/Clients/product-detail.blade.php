@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterLayoutClient')
 @section('content')
     <form action="" method="post">
         <div class="wrapper-product">
@@ -19,17 +19,17 @@
             </div>
         </div>
     </form>
-    @if ($productDetail->categories == 'face')
+    @if ($productDetail->category_id == 1)
         <div class="container mt-6" style="margin-top: 5%;">
             <h1>Related face products</h1>
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
                 @foreach ($productAll as $product)
-                    @if ($product->categories === 'face')
+                    {{-- @if ($product->category_id === 1) --}}
                         <div class="col-md-4">
                             <form action="" method="post">
                                 <div class="card">
                                     <a class="text-decoration-none"
-                                        href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
                                         <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
@@ -45,22 +45,22 @@
                                 </div>
                             </form>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
             </div>
         </div>
-    @elseif($productDetail->categories == 'hair')
+    @elseif($productDetail->category_id == 2)
         <div class="container mt-6" style="margin-top: 5%;">
             <h1>Related hair products</h1>
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
                 @foreach ($productAll as $product)
-                    @if ($product->categories === 'face')
+                    {{-- @if ($product->categories === 'face') --}}
                         <div class="col-md-4">
                             <form action="" method="post">
                                 <div class="card">
 
                                     <a class="text-decoration-none"
-                                        href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
                                         <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
@@ -76,7 +76,7 @@
                                 </div>
                             </form>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 @endforeach
             </div>
         </div>

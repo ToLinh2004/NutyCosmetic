@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProducttController;
-
-use App\Models\Product;
+// use App\Models\Product;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Models\Admin\Categories;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,14 +38,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 });
 
-Route::get('/home',[ProductController::class,'index'])->name('home');
-
-Route::get('/product',[ProductController::class,'getAllProduct'])->name('all-product');
-Route::get('/product-face',[ProductController::class,'productFace'])->name('product-face');
-Route::get('/product-hair',[ProductController::class,'productHair'])->name('product-hair');
-Route::get('/product-detail/{id}',[ProductController::class,'productDetail'])->name('product-detail');
-
-Route::resource('productt',ProducttController::class)
-->names([
+Route::prefix('/user')->name('user.')->group(function(){
+    Route::get('/home',[ProductController::class,'home'])->name('home');
+    Route::get('/product',[ProductController::class,'getAllProduct'])->name('all-product');
+    Route::get('/product-detail/{id}/{category_id}',[ProductController::class,'productDetail'])->name('product-detail');
+    Route::get('/category/{id}',[CategoriesController::class,'getCategoryDetail'])->name('category-detail');
     
-]);
+});
+
