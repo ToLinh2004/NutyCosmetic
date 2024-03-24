@@ -29,7 +29,6 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -44,7 +43,6 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->category }}</td>
-                            <td>{{ $item->status }}</td>
                             <td>
                                 <div class="d-flex">
                                     <a href="{{ route('admin.editproduct', ['id' => $item->id]) }}"

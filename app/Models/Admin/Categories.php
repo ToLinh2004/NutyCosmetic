@@ -15,9 +15,19 @@ class Categories extends Model
         ->get();
         return($categories);
     }
-    public function getCategoryDetail($id)
-    {
-        $typeCategory=Categories::find($id); // tìm khóa chính
-        return $typeCategory;
-    }   
+
+    public function add($data){
+        DB::insert('INSERT INTO categories(category_name) VALUES (?)', $data);
+    }
+    public function getDetail($id){
+        return DB::select('SELECT * FROM '. $this->table.' WHERE id = ?', [$id]);
+    }
+    public function updateCategory($data,$id){
+        $data[] =$id ;
+        return DB::update('UPDATE ' . $this->table . ' SET category_name = ? WHERE id = ?', $data);
+    }
+    public function deleteCategory($id){
+        return DB::delete('DELETE FROM ' . $this->table . ' WHERE id = ?', [$id]);
+    }
+    
 }

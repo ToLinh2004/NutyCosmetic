@@ -38,8 +38,13 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::post('/update',[ProductController::class,'update'])->name('updateproduct');
     Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('deleteproduct');
     Route::get('/order', [OrderController::class,'index'])->name('orders');
-    Route::get('/update/{order_id}/{status}', [OrderController::class, 'updateStatus'])->name('update_status');
+    // category
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('/addcategory', [CategoriesController::class,'create'])->name('addcategory');
+    Route::post('/addcategory', [CategoriesController::class, 'store'])->name('storecategories');
+    Route::get('/editCategories{id}', [CategoriesController::class, 'show'])->name('editCategories');
+    Route::post('/updateCategories',[CategoriesController::class,'update'])->name('updatecategories');
+    Route::get('/delete/{id}', [CategoriesController::class, 'destroy'])->name('deletecategory');
 });
 
 Route::prefix('/user')->name('user.')->group(function(){
