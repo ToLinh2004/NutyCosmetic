@@ -17,4 +17,27 @@ class Products extends Model
         ->get();
         return($products);
     }
+    public function getAllProducts()
+    {
+        $productAll=Products::all();
+        return  $productAll;
+    }
+    public function getProductPopular()
+    {
+        $productsPopular = DB::select('SELECT * FROM products ORDER BY quantity ASC limit 8');
+        return $productsPopular;
+    }
+    public function getProductDetail($id)
+    {
+        return DB::select('SELECT *FROM ' . $this->table . ' WHERE id=?', [$id]);
+    }
+    public function getCategory($typeCategory) {
+        $products = Products::where('category_id',$typeCategory->id)->get();
+        return $products;
+        
+    }
+    public function getProductCategory($typeCategory) {
+        $products = Products::where('category_id',$typeCategory)->get();
+        return $products;
+    }
 }
