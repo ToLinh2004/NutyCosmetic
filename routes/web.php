@@ -27,16 +27,19 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('Admin.Adminhomepage');
     })->name('Homepage');
+    // user
     Route::get('/user', [UserController::class, 'index'] )->name('user');
     Route::get('/editUser/{id}', [UserController::class, 'show'])->name('edituser');
     Route::post('/update',[UserController::class,'update'])->name('updateuser');
-    Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('softdeleteuser');
+    Route::get('/deletes/{id}', [UserController::class, 'destroy'])->name('softdeleteuser');
+    // product
     Route::get('/product', [ProductController::class,'index'])->name('products');
     Route::get('/addProduct', [ProductController::class, 'create'])->name('addproduct');
     Route::post('/addProduct', [ProductController::class, 'store'])->name('storeproduct');
     Route::get('/editProduct/{id}', [ProductController::class, 'show'])->name('editproduct');
     Route::post('/update',[ProductController::class,'update'])->name('updateproduct');
-    Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('deleteproduct');
+    Route::get('/deleted/{id}', [ProductController::class, 'destroy'])->name('deleteproduct');
+    // order
     Route::get('/order', [OrderController::class,'index'])->name('orders');
     // category
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
