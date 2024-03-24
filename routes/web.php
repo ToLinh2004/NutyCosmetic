@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProducttController;
+
 use App\Models\Product;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +43,9 @@ Route::get('/home',[ProductController::class,'index'])->name('home');
 Route::get('/product',[ProductController::class,'getAllProduct'])->name('all-product');
 Route::get('/product-face',[ProductController::class,'productFace'])->name('product-face');
 Route::get('/product-hair',[ProductController::class,'productHair'])->name('product-hair');
+Route::get('/product-detail/{id}',[ProductController::class,'productDetail'])->name('product-detail');
+
+Route::resource('productt',ProducttController::class)
+->names([
+    
+]);

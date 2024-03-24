@@ -29,8 +29,7 @@
                     <div class="col-md-4">
                         <form action="" method="post">
                             <div class="card">
-
-                                <a class="text-decoration-none" href="">
+                                <a class="text-decoration-none" href="{{ route('product-detail', ['id' => $product->id]) }}">
                                     <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
                                 </a>
                                 <div class="card-body">

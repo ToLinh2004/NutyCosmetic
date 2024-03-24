@@ -16,10 +16,9 @@ class ProductController extends Controller
     }
     
     public function index()
-    {
-       
+    {  
         $productPopular=$this->products->getProductPopular();
-        return view('home.index', compact('productPopular'));
+        return view('home.home', compact('productPopular'));
     }
 
     public function getAllProduct(){
@@ -34,5 +33,11 @@ class ProductController extends Controller
     public function productHair(){
         $productAll = $this->products->getAllProducts();
         return view('home.product-hair', compact('productAll'));
+    }
+    public function productDetail(Request $request, $id){
+        $productAll = $this->products->getAllProducts();
+        $product =$this->products->getProductDetail($id);
+        $productDetail=$product[0];
+        return view('home.product-detail',compact('productDetail','productAll'));
     }
 }
