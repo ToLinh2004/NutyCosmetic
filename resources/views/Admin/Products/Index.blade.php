@@ -9,12 +9,10 @@
     @endsection
 
     <div class="buttonAddProduct">
-        <a href="{{ route('admin.addproduct') }}">
-            <button type="submit" class="btn btn-success mx-3">
-                Add Product
-                <i class="fa fa-plus"></i>
-            </button>   
-        </a>
+        <button type="submit" class="btn btn-success mx-3">
+            Add Product
+            <i class="fa fa-plus"></i>
+        </button>
     </div>
     <div class="tableProduct mt-5">
         <table class="table table-striped ">
@@ -27,7 +25,7 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
-                    <th scope="col" style="text-align: center;" >Action</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>

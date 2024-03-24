@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin\Products;
 
 class CategoriesController extends Controller
 {
     private $categories;
+    private $products;
     public function __construct()
     {
-        $this->categories = new Categories;
+        $this->categories= new Categories;
+        $this->products=new Products;
     }
     public function index()
     {
@@ -111,5 +114,13 @@ class CategoriesController extends Controller
         $category->deletecategory($id); 
         
         return redirect()->route('admin.categories')->with('msg', 'Deleted category successfully.');
+    }
+
+
+    public function getCategoryDetail($id)
+    {  
+        $typeCategory=$this->categories->getCategoryDetail($id);
+        $products =$this->products->getCategory($typeCategory);
+        return view('Clients.categories', compact('typeCategory','products'));
     }
 }

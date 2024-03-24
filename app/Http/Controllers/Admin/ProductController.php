@@ -69,4 +69,21 @@ class ProductController extends Controller
     {
         //
     }
+    public function home()
+    {  
+        $productPopular=$this->products->getProductPopular();
+        
+        return view('Clients.home', compact('productPopular'));
+    }
+
+    public function getAllProduct(){
+        $productAll=$this->products->getAllProducts();
+        return view('Clients.product', compact('productAll'));
+    }
+
+    public function productDetail($id,$category_id){
+        $productDetail=Products::find($id);
+        $productAll =$this->products->getProductCategory($category_id);
+        return view('Clients.product-detail',compact('productDetail','productAll'));
+    }
 }
