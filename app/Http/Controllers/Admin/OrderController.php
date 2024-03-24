@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\Orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Admin\OrderStatus;
 class OrderController extends Controller
 {
     private $orders;
@@ -16,7 +16,9 @@ class OrderController extends Controller
     public function index()
     {
         $ordersList = $this -> orders -> getAllOrder();
-        return view('Admin.Orders.AdminOrder', compact('ordersList'));
+        $orderStatuses = OrderStatus::all();
+        // dd($orderStatuses);
+        return view('Admin.Orders.AdminOrder', ['ordersList' => $ordersList, 'orderStatuses' => $orderStatuses]);
     }
 
     /**
@@ -24,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Orders.AddOrder');
     }
 
     /**
@@ -66,4 +68,20 @@ class OrderController extends Controller
     {
         //
     }
+    public function updateStatus($order_id, $status)
+{
+    // Lấy đơn hàng cần cập nhật
+    $order = $this->orders::find($order_id);
+
+    // Kiểm tra xem đơn hàng có tồn tại không
+    if (!$order) {
+        return back()->with('error', 'Order not found');
+    }
+
+    // Cập nhật trạng thái của đơn hàng
+    $order->status_name = $status;
+    $order->save();
+
+    return redirect()->back()->with('success', 'Order status updated successfully');
+}
 }
