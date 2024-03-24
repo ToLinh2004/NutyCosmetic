@@ -15,7 +15,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categoriesList = $this->categories->getAllCategories();
-        return view('Admin.Categories.AdminCategories', compact('categoriesList'));
+        return view('Admin.Categories.Index', compact('categoriesList'));
     }
 
     /**
@@ -23,7 +23,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Categories.Add');
     }
 
     /**
@@ -31,15 +31,40 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'category_name' => 'required|min:2'
+            ],
+            [
+                'category_name' => 'Username is required.',
+                'category_name' => 'Username must be at least :min characters.',
+            ]);
+
+            $dataInsert =[
+                $request -> category_name,
+            ];
+
+            $this -> categories -> add($dataInsert);
+            return redirect()->route('admin.categories')->with('msg', 'Category created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        if (!empty($id)) {
+            $categoryDetail = $this->categories->getDetail($id);
+            if (!empty($categoryDetail[0])) {
+                $request->session()->put('id', $id);
+                $categoryDetail = $categoryDetail[0];
+            } else {
+                return redirect()->route('categories.index')->with('msgerror', 'The category does not exist');
+            }
+        } else {
+            return redirect()->route('categories.index')->with('msgerror', 'The category does not exist');
+        }
+        return view('Admin.categories.Edit', compact('categoryDetail'));
     }
 
     /**
@@ -53,9 +78,26 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        $id = session('id');
+        if (empty($id)) {
+            return back()->with('msgerror', 'Link is not valid');
+        }
+        $request->validate(
+            [
+                'category_name' => 'required|min:2'
+            ],
+            [
+                'category_name.required' => 'category name is required.',
+                'category_name.min' => 'category name must be at least :min characters.',
+            ]);
+            $dataUpdate = [
+                $request->category_name
+            ];
+            $this->categories->updateCategory($dataUpdate, $id);
+            return redirect()->route('admin.categories')->with('msg', 'Updated category successfully.');
     }
 
     /**
@@ -63,6 +105,11 @@ class CategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = $this->categories::findOrFail($id);
+        $category->status = 'inactive';
+        
+        $category->deletecategory($id); 
+        
+        return redirect()->route('admin.categories')->with('msg', 'Deleted category successfully.');
     }
 }

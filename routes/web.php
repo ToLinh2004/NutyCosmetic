@@ -31,5 +31,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/product', [ProductController::class,'index'])->name('products');
     Route::get('/addproduct', [ProductController::class,'create'])->name('addproduct');
     Route::get('/order', [OrderController::class,'index'])->name('orders');
+    // category
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+    Route::get('/addcategory', [CategoriesController::class,'create'])->name('addcategory');
+    Route::post('/addcategory', [CategoriesController::class, 'store'])->name('storecategories');
+    Route::get('/editCategories{id}', [CategoriesController::class, 'show'])->name('editCategories');
+    Route::post('/updateCategories',[CategoriesController::class,'update'])->name('updatecategories');
+    Route::get('/delete/{id}', [CategoriesController::class, 'destroy'])->name('deletecategory');
 });

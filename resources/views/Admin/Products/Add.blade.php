@@ -1,8 +1,8 @@
 @extends('layouts.masterLayoutAdmin')
 @section('titles')
-    User
+    Add product
 @endsection
-@section('card')
+@section('card')                                                                                                                                            
     <div>
     @section('title')
         <h1 class="text-center title">
