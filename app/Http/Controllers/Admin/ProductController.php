@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Models\Admin\Products;
 use App\Http\Controllers\Controller;
@@ -9,6 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     private $products;
+    private $categories;
     public function __construct()
     {
         $this->products = new Products;
@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $productList = $this->products->getAllProduct();
-        return view('Admin.Products.AdminProduct', compact('productList'));
+        return view('Admin.Products.Index', compact('productList'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Products.Add');
     }
 
     /**

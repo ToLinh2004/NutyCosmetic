@@ -25,7 +25,6 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -40,11 +39,10 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->category }}</td>
-                            <td>{{ $item->status }}</td>
                             <td>
                                 <div class="d-flex">
                                     <a href="" class="mx-3 btn btn-warning btn-sm">Edit</a>
-                                    <a onclick="return confirm('Are you sure you want to delete?')" href="#" class="btn btn-danger btn-sm">Delete</a>
+                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="#" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>
                         </tr>
