@@ -30,5 +30,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('softdeleteuser');
     Route::get('/product', [ProductController::class,'index'])->name('products');
     Route::get('/order', [OrderController::class,'index'])->name('orders');
+    Route::get('/update/{order_id}/{status}', [OrderController::class, 'updateStatus'])->name('update_status');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 });
