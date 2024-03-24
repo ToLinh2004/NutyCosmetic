@@ -23,8 +23,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         return view('Admin.Adminhomepage');
     })->name('Homepage');
     Route::get('/user', [UserController::class, 'index'] )->name('user');
-    Route::get('/addUser', [UserController::class, 'create'])->name('adduser');
-    Route::post('/addUser', [UserController::class, 'store'])->name('storeuser');
     Route::get('/editUser/{id}', [UserController::class, 'show'])->name('edituser');
     Route::post('/update',[UserController::class,'update'])->name('updateuser');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('softdeleteuser');
