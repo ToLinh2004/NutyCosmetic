@@ -5,7 +5,7 @@
 @section('card')
     <div>
     @section('title')
-        <h1 class="text-center title">CATEGORY</h1>
+        <h1 class="text-center title">CATEGORYS</h1>
     @endsection
     <div class="buttonAddCategory">
         <a href="{{ route('admin.addcategory') }}">

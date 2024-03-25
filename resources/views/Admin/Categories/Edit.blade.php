@@ -20,7 +20,8 @@
                         <span style="color:red">{{$message}}</span>
                     @enderror
             </div><br><br>
-            <button type="submit" class="btn btn-primary">Update Category</button>
+            <button type="submit" class="btn btn-primary mb-3 me-3">Update Category</button>
+            <a href="{{ route('admin.categories') }}" class="btn btn-warning mb-3">Back</a>
         </form>
     </div>
 </div>
