@@ -17,7 +17,7 @@
     @endif
     <div class="row d-flex justify-content-center mt-5">
         <div class="col-8  border border-info rounded p-4">
-            <form action="{{ route('admin.storeproduct') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mt-3 mb-3">
                     <label for="product_name">Product Name</label>
@@ -72,7 +72,7 @@
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary mb-3 me-3">Add Product</button>
-                    <a href="{{ route('admin.products') }}" class="btn btn-warning mb-3">Back</a>
+                    <a href="{{ route('admin.product.index') }}" class="btn btn-warning mb-3">Back</a>
                 </div>
             </form>
         </div>

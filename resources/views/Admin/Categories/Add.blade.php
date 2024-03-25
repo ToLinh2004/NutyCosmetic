@@ -18,7 +18,7 @@
     @endif
     <div class="row d-flex justify-content-center mt-5">
         <div class="col-8  border border-info rounded p-4">
-            <form action="{{ route('admin.storecategories') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf 
                 <div class="form-group">
                     <label for="category_name">Category Name:</label> <br><br>
@@ -28,7 +28,7 @@
                     @enderror
                 </div><br><br>
                 <button type="submit" class="btn btn-primary mb-3 me-3">Add Category</button>
-                    <a href="{{ route('admin.categories') }}" class="btn btn-warning mb-3">Back</a>
+                    <a href="{{ route('admin.category.index') }}" class="btn btn-warning mb-3">Back</a>
             </form>
             
         </div>
