@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\FE\LoginUserController;
+use App\Http\Controllers\FE\LoginController;
 use App\Http\Controllers\FE\DashboardUserController;
-use App\Http\Controllers\FE\HomeController;
+use App\Http\Controllers\LoginController as ControllersLoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,16 +24,11 @@ use App\Http\Controllers\FE\HomeController;
 //     return view('welcome');
 // });
 Route::get('/', [ProductController::class,'home'])->name('home');
-
-
-Route::get('/login', [LoginUserController::class, 'index'])->name('login.index');
-Route::post('/dang_nhap', [LoginUserController::class, 'login'])->name('login.user');
-Route::get('/dang_ky', [LoginUserController::class, 'register'])->name('register.user');
-
-Route::post('/store', [LoginUserController::class, 'store'])->name('register.store');
-
-Route::get('/logout', [LoginUserController::class, 'logout'])->name('login.userout');
-
+Route::get('/registerUser',[LoginController::class, 'create'])->name('registerUser');
+Route::post('/registerUser', [LoginController::class, 'store'])->name('storeUser');
+Route::get('/loginUser',[LoginController::class, 'showLogin'])->name('login');
+Route::post('/loginUser',[LoginController::class, 'loginUser'])->name('loginUser');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('/dashboard_user', [DashboardUserController::class, 'index'])->name('dashboard.user');
 
 Route::prefix('/admin')->name('admin.')->group(function () {

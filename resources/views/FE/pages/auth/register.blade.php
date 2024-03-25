@@ -1,51 +1,75 @@
 @extends('layouts.master')
-
 @section('content')
-    <div class="container">
-        <div class="wrapper d-flex align-items-center justify-content-center h-100">
-            <div class="card login-form">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Login Form</h5>
-                    <form action="{{ route('register.store') }}" method="post">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="exampleInputName" class="form-label">User Name</label>
-                            <input type="text" name="user_name" class="form-control" id="exampleInputName"
-                                aria-describedby="emailHelp">
-                        </div>
-                        @if ($errors->has('user_name'))
-                        <code class="error-message">{{ $errors->first('user_name') }}</code>
-                    @endif
-                    <div class="mb-3">
-                        <label for="exampleInputEmail" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail"
-                            aria-describedby="emailHelp">
-                    </div>
-                    @if ($errors->has('email'))
-                    <code class="error-message">{{ $errors->first('email') }}</code>
-                @endif
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        @if ($errors->has('password'))
-                        <code class="error-message">{{ $errors->first('password') }}</code>
-                    @endif
-
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password Confirmation</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    @if ($errors->has('password_confirmation'))
-                    <code class="error-message">{{ $errors->first('password_confirmation') }}</code>
-                @endif
-                        <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
-                        <div class="sign-up mt-4">
-                            Don't have an account? <a href="{{route('login.index')}}">Login</a>
-                        </div>
-                    </form>
+    <div>
+    @if (session('msg'))
+        <div class="alert alert-success">{{ session('msg') }}</div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">The data entered is invalid. Please check again</div>
+    @endif
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-8  border border-info rounded p-4 ">
+            <form action="{{route('storeUser')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <h3 class="text-center">Register</h3>
+                <div class="form-group mt-3 mb-3">
+                    <label for="user_name">User Name:</label>
+                    <input type="text" class="form-control mt-2" id="user_name" name="user_name" required
+                        value="{{ old('user_name') }}">
+                    @error('user_name')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
                 </div>
-            </div>
+                <div class="form-group mb-3">
+                    <label for="phone">Phone:</label>
+                    <input type="number" class="form-control mt-2" id="phone" name="phone" required
+                        value="{{ old('phone') }}">
+                    @error('phone')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group mt-3 mb-3">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control mt-2" id="password" name="password" required>
+                    @error('password')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control mt-2" id="email" name="email" required
+                        value="{{ old('email') }}">
+                    @error('email')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label for="image">Image:</label>
+                    <input type="file" class="form-control mt-2" id="image" name="image" required
+                        value="{{ old('image') }}">
+                    @error('image')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control mt-2" id="address" name="address" required
+                        value="{{ old('address') }}">
+                    @error('address')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info">Register</button>
+                    <div class="d-flex justify-content-center mt-3">
+                        <p class="text-center ">Do you have an account yet?</p>
+                        <a href="{{ route('login') }}" class="ml-2"><b>Login</b></a>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
 
-        @endsection
+</div>
+
+@endsection
