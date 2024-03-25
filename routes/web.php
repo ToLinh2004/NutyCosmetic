@@ -1,13 +1,13 @@
 <?php
-
-// use App\Models\Product;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Models\Admin\Categories;
+use App\Http\Controllers\FE\LoginController;
+use App\Http\Controllers\FE\DashboardUserController;
+use App\Http\Controllers\LoginController as ControllersLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +20,17 @@ use App\Models\Admin\Categories;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [ProductController::class,'home'])->name('home');
+Route::get('/registerUser',[LoginController::class, 'create'])->name('registerUser');
+Route::post('/registerUser', [LoginController::class, 'store'])->name('storeUser');
+Route::get('/loginUser',[LoginController::class, 'showLogin'])->name('login');
+Route::post('/loginUser',[LoginController::class, 'loginUser'])->name('loginUser');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
+Route::get('/dashboard_user', [DashboardUserController::class, 'index'])->name('dashboard.user');
+
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('Admin.Adminhomepage');
