@@ -4,13 +4,16 @@ namespace App\Http\Controllers\FE;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        return view('FE.pages.dashboard.profile');
+        $profiles = Auth::user();
+
+        return view('FE.pages.dashboard.profile', compact('profiles'));
     }
 
     /**

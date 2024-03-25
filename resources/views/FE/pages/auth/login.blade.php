@@ -1,37 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>login</title>
-   
-</head>
-<body>
-    <style>
-        .error-message{
-            color: red;
-        font-size: 1rem;
-        
-        }
-    </style>
-    <form action="{{route('login.user')}}" method="post">
-        @csrf
-        <label for="">Email</label>
-        <input type="email" name="email">
-        @if ($errors->has('email'))
-            <code class="error-message">{{ $errors->first('email') }}</code>
-        @endif
-        <label for="">Password</label>
-        <input type="password" name="password">
-        @if ($errors->has('password'))
-            <code class="error-message">{{ $errors->first('password') }}</code>
-        @endif
-        <button type="submit">Login</button>
-    </form>
+@extends('layouts.master')
+@if (session('successs'))
+    <div class="alert alert-success">{{session('successs')}}</div>
+    @endif
 
-    <a href="{{route('register.user')}}">Đăng ký</a>
+    @if (session('error'))
+    <div class="alert alert-danger">{{session('error')}}</div>
+    @endif
+@section('content')
+    <div class="container">
+        <div class="wrapper d-flex align-items-center justify-content-center h-100">
+            <div class="card login-form">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Login Form</h5>
+                    <form action="{{route('login.user')}}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                        </div>
+                        @if ($errors->has('email'))
+                        <code class="error-message">{{ $errors->first('email') }}</code>
+                    @endif
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        @if ($errors->has('password'))
+                        <code class="error-message">{{ $errors->first('password') }}</code>
+                    @endif
+                        <button type="submit" class="btn btn-primary w-100">login</button>
+                        <div class="sign-up mt-4">
+                            Don't have an account? <a href="{{route('register.user')}}">Đăng ký</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    
-</body>
-</html>
+        @endsection

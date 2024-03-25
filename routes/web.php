@@ -22,7 +22,7 @@ use App\Http\Controllers\FE\HomeController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [ProductController::class,'home'])->name('home');
 
 
 Route::get('/login', [LoginUserController::class, 'index'])->name('login.index');

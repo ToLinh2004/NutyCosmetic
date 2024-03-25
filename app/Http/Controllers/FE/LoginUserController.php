@@ -23,13 +23,18 @@ class LoginUserController extends Controller {
             'email' =>  $request->input('email'),
             'password' => $request->input('password')
         ];
-
+    
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.user')->with('successs', 'Đăng nhập thành công');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.Homepage')->with('successs', 'Đăng nhập thành công');
+            } else {
+                return redirect()->route('user.home')->with('successs', 'Đăng nhập thành công');
+            }
         } else {
             return redirect()->route('login.index')->with('error', 'Email hoặc mật khẩu không đúng');
         }
     }
+    
 
     public function register() {
         return view('FE.pages.auth.register');

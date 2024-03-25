@@ -43,9 +43,12 @@
         </a>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="">Register</a></li>
-        <li><a class="dropdown-item" href="">Login</a></li>
-        <li><a class="dropdown-item" href="">Logout</a></li>
-        <li><a class="dropdown-item" href="">Profile</a></li>
+        @if (auth()->check())
+            <li><a class="dropdown-item" href="{{ route('dashboard.user') }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('login.userout') }}">Logout</a></li>
+        @else
+            <li><a class="dropdown-item" href="{{ route('register.user') }}">Register</a></li>
+            <li><a class="dropdown-item" href="{{ route('login.index') }}">Login</a></li>
+        @endif
     </ul>
 </div>
