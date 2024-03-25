@@ -20,11 +20,11 @@
     @endif
     <div class="row d-flex justify-content-center mt-5">
         <div class="col-8  border border-info rounded p-4 ">
-            <form action="{{ route('admin.updateuser') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.user.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mt-3 mb-3">
                     <label for="user_name">User Name</label>
-                    <input type="text" class="form-control" name="user_name" placeholder="Ho va ten"
+                    <input type="text" class="form-control" name="user_name" placeholder="User Name"
                         value="{{ old('user_name') ?? $userDetail->user_name }}">
                     @error('user_name')
                         <span style="color:red">{{ $message }}</span>
@@ -85,7 +85,7 @@
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary mb-3 me-3">Edit User</button>
-                    <a href="{{ route('admin.user') }}" class="btn btn-warning mb-3">Back</a>
+                    <a href="{{ route('admin.user.index') }}" class="btn btn-warning mb-3">Back</a>
                 </div>
 
             </form>

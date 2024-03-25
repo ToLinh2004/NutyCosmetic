@@ -10,7 +10,7 @@
     
     <div class="tableCategory mt-5">
        
-        <form action="{{ route('admin.updatecategories') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.category.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
            
             <div class="form-group">

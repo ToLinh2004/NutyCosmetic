@@ -8,7 +8,7 @@
         <h1 class="text-center title">CATEGORY</h1>
     @endsection
     <div class="buttonAddCategory">
-        <a href="{{ route('admin.addcategory') }}">
+        <a href="{{ route('admin.category.add') }}">
             <button type="submit" class="btn btn-success mx-3">
                 Add Categries
                 <i class="fa fa-plus"></i>
@@ -32,8 +32,8 @@
                             <td>{{ $item->category }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{route('admin.editCategories', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
-                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin.deletecategory', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{route('admin.category.edit', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
+                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin.category.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>
                         </tr>

@@ -90,7 +90,7 @@ class UserController extends Controller
             $imagePath
         ];
         $this->users->updateUser($dataUpdate, $id);
-        return redirect()->route('admin.user')->with('msg', 'Updated user successfully.');
+        return redirect()->route('admin.user.index')->with('msg', 'Updated user successfully.');
     }
     public function destroy(string $id)
     {
@@ -99,6 +99,6 @@ class UserController extends Controller
         
         $user->deleteUser($id); 
         
-        return redirect()->route('admin.user')->with('msg', 'Deleted user successfully.');
+        return redirect()->route('admin.user.index')->with('msg', 'Deleted user successfully.');
     }
 }

@@ -38,8 +38,8 @@
                             <td><img src="{{asset($item->image)}}" style="width:100px;" alt="avatar"></td>
                             <td>{{ $item->status }}</td>
                             <td>
-                                <a href="{{route('admin.edituser', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
-                                <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin.softdeleteuser', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{{route('admin.user.edit', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
+                                <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin.user.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                     @endforeach

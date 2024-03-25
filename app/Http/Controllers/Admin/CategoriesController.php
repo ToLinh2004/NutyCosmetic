@@ -48,7 +48,7 @@ class CategoriesController extends Controller
             ];
 
             $this -> categories -> add($dataInsert);
-            return redirect()->route('admin.categories')->with('msg', 'Category created successfully.');
+            return redirect()->route('admin.category.index')->with('msg', 'Category created successfully.');
     }
 
     /**
@@ -62,10 +62,10 @@ class CategoriesController extends Controller
                 $request->session()->put('id', $id);
                 $categoryDetail = $categoryDetail[0];
             } else {
-                return redirect()->route('categories.index')->with('msgerror', 'The category does not exist');
+                return redirect()->route('admin.category.index')->with('msgerror', 'The category does not exist');
             }
         } else {
-            return redirect()->route('categories.index')->with('msgerror', 'The category does not exist');
+            return redirect()->route('admin.category.index')->with('msgerror', 'The category does not exist');
         }
         return view('Admin.categories.Edit', compact('categoryDetail'));
     }
@@ -100,7 +100,7 @@ class CategoriesController extends Controller
                 $request->category_name
             ];
             $this->categories->updateCategory($dataUpdate, $id);
-            return redirect()->route('admin.categories')->with('msg', 'Updated category successfully.');
+            return redirect()->route('admin.category.index')->with('msg', 'Updated category successfully.');
     }
 
     /**
@@ -113,7 +113,7 @@ class CategoriesController extends Controller
         
         $category->deletecategory($id); 
         
-        return redirect()->route('admin.categories')->with('msg', 'Deleted category successfully.');
+        return redirect()->route('admin.category.index')->with('msg', 'Deleted category successfully.');
     }
 
 
