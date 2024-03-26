@@ -29,5 +29,9 @@ class Categories extends Model
     public function deleteCategory($id){
         return DB::delete('DELETE FROM ' . $this->table . ' WHERE id = ?', [$id]);
     }
-    
+    public function getCategoryDetail($id)
+    {
+        $typeCategory=Categories::find($id); // tìm khóa chính
+        return $typeCategory;
+    }   
 }

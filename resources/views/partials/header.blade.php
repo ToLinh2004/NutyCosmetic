@@ -22,16 +22,16 @@
     <a href="">About Us</a>
     <a href="">Contact Us</a>
 </nav>
-<div class="search-container">
+<div class="" >
     <form action="" method="post">
-        <input type="text" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search" class="border rounded">
+        <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
         <button class="burger-menu" type="button" onclick="toggleMenu()">&#9776;</button>
     </form>
 </div>
 <div class="icon-nav">
     <div class="item1">
-        <a href=""><i class="fa-solid fa-cart-shopping"
+        <a href="{{route('user.show-cart')}}"><i class="fa-solid fa-cart-shopping"
                 style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
     </div>
 

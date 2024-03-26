@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Products;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +42,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:1',
                 'image' => 'required|mimes:jpg,jpeg,png',
                 'quantity' => 'required|numeric|min:1',
-                'description' =>'required'
+                'description' => 'required'
             ],
             [
                 'product_name.required' => 'Productname is required.',
@@ -113,7 +115,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:1',
                 'image' => 'required|mimes:jpg,jpeg,png',
                 'quantity' => 'required|numeric|min:1',
-                'description' =>'required'
+                'description' => 'required'
             ],
             [
                 'product_name.required' => 'Productname is required.',
@@ -172,5 +174,32 @@ class ProductController extends Controller
         $productDetail = Products::find($id);
         $productAll = $this->products->getProductCategory($category_id);
         return view('Clients.product-detail', compact('productDetail', 'productAll'));
+    }
+    public function addToCart($id)
+    {
+        // session()->flush('cart');
+        $product = Products::find($id);
+        $cart = session()->get('cart');
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
+        } else {
+            $cart[$id] = [
+                'name' => $product->product_name,
+                'image' => $product->image_url,
+                'quantity' => 1,
+                'price' => $product->price
+            ];
+        }
+        session()->put('cart', $cart);
+        return  response()->json(
+            [
+                'code'=>200,
+                'message'=>' success',
+            ], status: 200);
+    }
+    public function showCart(){
+
+        $carts=session()->get('cart');
+        return view('Clients.add-to-cart',compact('carts'));
     }
 }
