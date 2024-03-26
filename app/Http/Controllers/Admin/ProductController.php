@@ -69,7 +69,7 @@ class ProductController extends Controller
             $request->category
         ];
         $this->products->addProduct($dataInsert);
-        return redirect()->route('admin.products')->with('msg', 'Product created successfully.');
+        return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductController extends Controller
                 return redirect()->route('admin.products')->with('msgerror', 'The user does not exist');
             }
         } else {
-            return redirect()->route('admin.products')->with('msgerror', 'The user does not exist');
+            return redirect()->route('admin.product.index')->with('msgerror', 'The user does not exist');
         }
         $categories = DB::table('categories')->get();
         return view('Admin.Products.EditProduct', compact('productDetail', 'categories'));
@@ -143,7 +143,7 @@ class ProductController extends Controller
             $request->status
         ];
         $this->products->updateProduct($dataUpdate, $id);
-        return redirect()->route('admin.products')->with('msg', 'Product created successfully.');
+        return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
     }
     /**
      * Remove the specified resource from storage.
@@ -152,9 +152,9 @@ class ProductController extends Controller
     {
         $product = $this->products::findOrFail($id);
         $product->status = 'inactive';
-        $product->deleteProduct($id);
-
-        return redirect()->route('admin.products')->with('msg', 'Deleted product successfully.');
+        $product->deleteProduct($id); 
+        
+        return redirect()->route('admin.product.index')->with('msg', 'Deleted product successfully.');
     }
     public function home()
     {

@@ -10,7 +10,7 @@
     @if (session('msg'))
         <div class="alert alert-success">{{ session('msg') }}</div>
     @endif
-    <a href="{{ route('admin.addproduct') }}">
+    <a href="{{ route('admin.product.add') }}">
         <div class="buttonAddProduct">
             <button type="submit" class="btn btn-success mx-3">
                 Add Product
@@ -29,6 +29,7 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -43,11 +44,12 @@
                             <td>{{ $item->quantity }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->category }}</td>
+                            <td>{{ $item->status }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('admin.editproduct', ['id' => $item->id]) }}"
+                                    <a href="{{ route('admin.product.edit', ['id' => $item->id]) }}"
                                         class="mx-3 btn btn-warning btn-sm">Edit</a>
-                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{route('admin.deleteproduct',['id' => $item->id])}}"
+                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{route('admin.product.delete',['id' => $item->id])}}"
                                         class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>

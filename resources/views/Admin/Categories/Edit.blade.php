@@ -10,7 +10,7 @@
     
     <div class="tableCategory mt-5">
        
-        <form action="{{ route('admin.updatecategories') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.category.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
            
             <div class="form-group">
@@ -21,7 +21,7 @@
                     @enderror
             </div><br><br>
             <button type="submit" class="btn btn-primary mb-3 me-3">Update Category</button>
-            <a href="{{ route('admin.categories') }}" class="btn btn-warning mb-3">Back</a>
+            <a href="{{ route('admin.category.index') }}" class="btn btn-warning mb-3">Back</a>
         </form>
     </div>
 </div>
