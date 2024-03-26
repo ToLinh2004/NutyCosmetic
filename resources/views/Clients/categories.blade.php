@@ -35,7 +35,7 @@
                                     <h5 class="card-title">{{ $product->product_name }}</h5>
                                     <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                     <div>
-                                        <button type="submit" name="addcart" class="btn btn-success">Add to cart</button>
+                                        <a href="{{route('user.add-to-cart',['id'=>$product->id])}}" name="addcart" class="btn btn-success">Add to cart</a>
                                         <a href=""><button type="submit" class="btn btn-success">Buy now</button></a>
                                     </div>
                                 </div>

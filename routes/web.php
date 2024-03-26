@@ -55,4 +55,6 @@ Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/product',[ProductController::class,'getAllProduct'])->name('all-product');
     Route::get('/product-detail/{id}/{category_id}',[ProductController::class,'productDetail'])->name('product-detail');
     Route::get('/category/{id}',[CategoriesController::class,'getCategoryDetail'])->name('category-detail');
+    Route::get('/add-to-cart/{id}',[ProductController::class,'addToCart'])->name('add-to-cart');
+    Route::get('/show-cart',[ProductController::class,'showCart'])->name('show-cart');
 });

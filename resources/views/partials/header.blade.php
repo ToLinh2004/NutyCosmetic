@@ -31,7 +31,7 @@
 </div>
 <div class="icon-nav">
     <div class="item1">
-        <a href=""><i class="fa-solid fa-cart-shopping"
+        <a href="{{route('user.show-cart')}}"><i class="fa-solid fa-cart-shopping"
                 style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
     </div>
 
