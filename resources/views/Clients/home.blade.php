@@ -36,7 +36,7 @@
 
             <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use ingredients.</p>
             <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <div> <a href="" class="btn btn-success">View more </a></div>
+            <div> <a href="{{ route('user.product-detail', ['id' => $result->id, 'category_id' => $result->category_id]) }}" class="btn btn-success">View more </a></div>
         </div>
     @break
     @endforeach
@@ -60,7 +60,7 @@
 
         <h4></h4>
         <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-        <div> <a href="" class="btn btn-success">View more </a></div>
+        <div> <a href="{{ route('user.product-detail', ['id' => $result->id, 'category_id' => $result->category_id]) }}" class="btn btn-success">View more </a></div>
 
     </div>
 
@@ -82,7 +82,7 @@
 
             <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use ingredients.</p>
             <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <div> <a href="" class="btn btn-success">View more </a></div>
+            <div> <a href="{{ route('user.product-detail', ['id' => $result->id, 'category_id' => $result->category_id]) }}" class="btn btn-success">View more </a></div>
         </div>       
         @break
         @endforeach
