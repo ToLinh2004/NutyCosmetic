@@ -81,7 +81,7 @@ class ProductController extends Controller
                 $request->session()->put('id', $id);
                 $productDetail = $productDetail[0];
             } else {
-                return redirect()->route('admin.products')->with('msgerror', 'The user does not exist');
+                return redirect()->route('admin.product.index')->with('msgerror', 'The user does not exist');
             }
         } else {
             return redirect()->route('admin.product.index')->with('msgerror', 'The user does not exist');
