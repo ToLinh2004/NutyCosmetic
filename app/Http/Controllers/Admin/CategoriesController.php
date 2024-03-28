@@ -116,11 +116,4 @@ class CategoriesController extends Controller
         return redirect()->route('admin.category.index')->with('msg', 'Deleted category successfully.');
     }
 
-
-    public function getCategoryDetail($id)
-    {  
-        $typeCategory=$this->categories->getCategoryDetail($id);
-        $products =$this->products->getCategory($typeCategory);
-        return view('Clients.categories', compact('typeCategory','products'));
-    }
 }
