@@ -36,13 +36,15 @@
                                 <h5 class="card-title">{{ $product->product_name }}</h5>
                                 <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                 <div>
-                                    <a href="{{route('user.add-to-cart',['id'=>$product->id])}}" name="addcart" class="btn btn-success">Add to cart</a>
-                                    <a href=""><button type="submit" class="btn btn-success">Buy now</button></a>
+                                    <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
+                                    <a href="#">
+                                        <button type="submit" class="btn btn-success">Buy now</button>
+                                    </a>
                                     <input type="hidden" name="PId" value="{{ $product->id }}">
-                                    <input type='hidden' name='PName' value="{{ $product->product_name }}">
-                                    <input type='hidden' name='Image' value="{{ $product->image_url }}">
-                                    <input type='hidden' name='PPrice' value="{{ $product->price }}">
-                                    <input type='hidden' name='addcart' value="order">
+                                    <input type="hidden" name="PName" value="{{ $product->product_name }}">
+                                    <input type="hidden" name="Image" value="{{ $product->image_url }}">
+                                    <input type="hidden" name="PPrice" value="{{ $product->price }}">
+                                    <input type="hidden" name="addcart" value="order">
                                 </div>
                             </div>
                         </div>
@@ -51,4 +53,6 @@
             @endforeach
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{asset('js/product.js')}}"></script>
 @endsection
