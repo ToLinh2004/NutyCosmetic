@@ -8,6 +8,9 @@ use App\Http\Controllers\User\CategoriesController as UserCategoriesController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
+use App\Http\Controllers\User\ContactController as UserContactController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+
 
 
 /*
@@ -63,6 +66,10 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     });
     // order
     Route::get('/order', [AdminOrderController::class,'index'])->name('orders');
+    //Contact
+    Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
+    Route::put('/updateStatus/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
+
 });
 
 Route::prefix('/user')->name('user.')->group(function(){
@@ -72,4 +79,6 @@ Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/category/{id}',[UserCategoriesController::class,'getCategoryDetail'])->name('category-detail');
     Route::get('/add-to-cart/{id}',[UserProductController::class,'addToCart'])->name('add-to-cart');
     Route::get('/show-cart',[UserProductController::class,'showCart'])->name('show-cart');
+    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
+    Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
 });

@@ -8,6 +8,10 @@
         <li style="list-style-type:none" class="mx-4 mt-4">
             <a href="{{route('admin.category.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Category</a>
         </li>
+        <li style="list-style-type:none" class="mx-4 mt-4">
+            <a href="{{route('admin.contact')}}" style="font-size: 18px" class="text-decoration-none text-black">Contacts</a>
+        </li>
+
     </ul>
     <ul class="mt-4">
         <h4><b>INTERFACE</b></h4>
