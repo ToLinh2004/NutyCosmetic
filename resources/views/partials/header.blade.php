@@ -20,7 +20,7 @@
         </div>
     </div>
     <a href="">About Us</a>
-    <a href="{{route('user.contact-us')}}">Contact Us</a>
+    <a href="">Contact Us</a>
 </nav>
 <div class="" >
     <form action="" method="post">
@@ -46,6 +46,7 @@
         @if (session()->has('user_id'))
             <li><a class="dropdown-item" href="{{ route('dashboard.user') }}">Profile</a></li>
             <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+            <li><a class="dropdown-item" href="{{route('user.wishlist.index')}}">Yêu thích</a></li>
         @else
             <li><a class="dropdown-item" href="{{ route('registerUser') }}">Register</a></li>
             <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
