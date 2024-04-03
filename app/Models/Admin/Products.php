@@ -10,25 +10,33 @@ class Products extends Model
 {
     use HasFactory;
     protected $table = 'products';
-    public function getAllProduct(){
+    public function getAllProduct($perPage = 0){
         $products =DB::table('products')
         ->select('products.*', 'categories.category_name as category')
         ->join('categories', 'categories.id', '=' ,'products.category_id' )
-        ->get();
+        ->where('products.status','Active');
+        if (!empty($perPage)){
+            $products = $products->paginate($perPage);
+        }else{
+            $products = $products->get(); 
+        }
         return($products);
     }
     public function addProduct($data){
-        DB::insert('INSERT INTO products(product_name, description, price, image_name, image_url, quantity, category_id) VALUES (?, ?, ?, ?, ?, ?, ?)', $data);
+        return DB::table($this->table) ->insert($data);
     }
     public function updateProduct($data,$id){
-        $data[] =$id ;
-        return DB::update('UPDATE ' . $this->table . ' SET product_name=?, description=?, price=?, image_name=?, image_url=?, quantity=?, category_id=?, status=? WHERE id=?', $data);
+        return DB::table($this->table)->where('id', $id)->update($data);
     }
     public function deleteProduct($id){
-        return DB::update('UPDATE '.$this->table.' SET status = \'Inactive\' WHERE id = ?', [$id]);
+        return DB::table($this->table)
+            ->where('id', $id)
+            ->update(['status' => 'Inactive']);
     }
     public function getProductDetail($id)
     {
-        return DB::select('SELECT *FROM ' . $this->table . ' WHERE id=?', [$id]);
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->get();
     }
 }

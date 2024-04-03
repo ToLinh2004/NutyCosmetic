@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     private $products;
+    const _PER_PAGE =  3;
     private $categories;
     public function __construct()
     {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $productList = $this->products->getAllProduct();
+        $productList = $this->products->getAllProduct(self::_PER_PAGE);
         return view('Admin.Products.Index', compact('productList'));
     }
 
@@ -58,13 +59,13 @@ class ProductController extends Controller
         );
         $imageName = time() . '.' . $request->image->extension();
         $dataInsert = [
-            $request->product_name,
-            $request->description,
-            $request->price,
-            $request->image_name,
-            $request->image->move('images', $imageName),
-            $request->quantity,
-            $request->category
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_name' => $request->image_name,
+            'image_url' => $request->image->move('images', $imageName),
+            'quantity' => $request->quantity,
+            'category_id' => $request->category
         ];
         $this->products->addProduct($dataInsert);
         return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
@@ -131,14 +132,14 @@ class ProductController extends Controller
         );
         $imageName = time() . '.' . $request->image->extension();
         $dataUpdate = [
-            $request->product_name,
-            $request->description,
-            $request->price,
-            $request->image_name,
-            $request->image->move('images', $imageName),
-            $request->quantity,
-            $request->category,
-            $request->status
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_name' => $request->image_name,
+            'image_url' => $request->image->move('images', $imageName),
+            'quantity' => $request->quantity,
+            'category_id' => $request->category,
+            'status' => $request->status
         ];
         $this->products->updateProduct($dataUpdate, $id);
         return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');

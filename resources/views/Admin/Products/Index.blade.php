@@ -22,7 +22,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col" style="width:15%">Product Name</th>
                     <th scope="col">Description</th>
                     <th scope="col" style="width:10%">Image</th>
@@ -60,4 +60,5 @@
         </table>
     </div>
 </div>
+{{$productList->links()}}
 @endsection

@@ -16,7 +16,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Phone</th>
                     <th style="width:15%" scope="col">Email</th>
@@ -46,6 +46,8 @@
                 @endif
             </tbody>
         </table>
+        
     </div>
 </div>
+{{$userList->links()}}
 @endsection
