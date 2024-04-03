@@ -8,6 +8,9 @@ use App\Http\Controllers\User\CategoriesController as UserCategoriesController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
+use App\Http\Controllers\User\ContactController as UserContactController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+
 
 
 /*
@@ -61,7 +64,9 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::post('/update',[AdminCategoriesController::class,'update'])->name('update');
         Route::get('/delete/{id}', [AdminCategoriesController::class, 'destroy'])->name('delete');
     });
-    // order
+    //Contact
+    Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
+
     Route::prefix('/order') ->name('order.')->group(function(){
         Route::get('/', [AdminOrderController::class,'index'])->name('index');
         Route::post('/update',[AdminOrderController::class,'update'])->name('update');
@@ -76,4 +81,6 @@ Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/category/{id}',[UserCategoriesController::class,'getCategoryDetail'])->name('category-detail');
     Route::get('/add-to-cart/{id}',[UserProductController::class,'addToCart'])->name('add-to-cart');
     Route::get('/show-cart',[UserProductController::class,'showCart'])->name('show-cart');
+    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
+    Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
 });
