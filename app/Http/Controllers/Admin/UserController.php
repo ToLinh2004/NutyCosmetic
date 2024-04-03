@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     private $users;
+    const _PER_PAGE =  3;
     public function __construct()
     {
         $this->users = new Users;
     }
     public function index()
     {
-        $userList = $this->users->getAllUser();
+        $userList = $this->users->getAllUser(self::_PER_PAGE);
         return view('Admin.User.AdminUser', compact('userList'));
     }
     public function create()
@@ -81,13 +82,13 @@ class UserController extends Controller
             $imagePath = $oldUser->image;
         }
         $dataUpdate = [
-            $request->user_name,
-            $request->email,
-            $request->phone,
-            $request->password,
-            $request->address,
-            $request->status,
-            $imagePath
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password'=> $request->password,
+            'address' => $request->address,
+            'status'=> $request->status,
+            'image' => $imagePath
         ];
         $this->users->updateUser($dataUpdate, $id);
         return redirect()->route('admin.user.index')->with('msg', 'Updated user successfully.');

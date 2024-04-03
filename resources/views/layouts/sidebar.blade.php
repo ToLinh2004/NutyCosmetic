@@ -19,7 +19,7 @@
             <a href="{{route('admin.user.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Users</a>
         </li>
         <li style="list-style-type:none" class="mx-4 mt-4">
-            <a href="{{route('admin.orders')}}" style="font-size: 18px" class="text-decoration-none text-black">Orders</a>
+            <a href="{{route('admin.order.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Orders</a>
         </li>
     </ul>
     <ul class="mt-4">

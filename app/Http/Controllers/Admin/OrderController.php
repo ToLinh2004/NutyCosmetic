@@ -1,37 +1,31 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Admin\Orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\OrderStatus;
+
 class OrderController extends Controller
 {
     private $orders;
+    private $order_status;
     public function __construct()
     {
         $this->orders = new Orders;
+        $this->order_status = new OrderStatus;
     }
-    
     public function index()
     {
-        $ordersList = $this -> orders -> getAllOrder();
-        $orderStatuses = OrderStatus::all();
-        // dd($orderStatuses);
-        return view('Admin.Orders.AdminOrder', ['ordersList' => $ordersList, 'orderStatuses' => $orderStatuses]);
+        $ordersList = $this->orders->getAllOrder();
+        $orderStatus = $this->order_status->getAll();
+        // dd($ordersList);
+        return view('Admin.Orders.AdminOrder', ['ordersList' => $ordersList,'orderStatus'=>$orderStatus]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('Admin.Orders.AddOrder');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
@@ -56,32 +50,14 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $value = $request->order_status;
+        $updateStatus = $this->orders->updateStatus($id, $value);
+        return redirect() -> route('admin.order.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
     }
-    public function updateStatus($order_id, $status)
-{
-    // Lấy đơn hàng cần cập nhật
-    $order = $this->orders::find($order_id);
-
-    // Kiểm tra xem đơn hàng có tồn tại không
-    if (!$order) {
-        return back()->with('error', 'Order not found');
-    }
-
-    // Cập nhật trạng thái của đơn hàng
-    $order->status_name = $status;
-    $order->save();
-
-    return redirect()->back()->with('success', 'Order status updated successfully');
-}
 }
