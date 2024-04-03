@@ -62,8 +62,12 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/delete/{id}', [AdminCategoriesController::class, 'destroy'])->name('delete');
     });
     // order
-    Route::get('/order', [AdminOrderController::class,'index'])->name('orders');
+    Route::prefix('/order') ->name('order.')->group(function(){
+        Route::get('/', [AdminOrderController::class,'index'])->name('index');
+        Route::post('/update',[AdminOrderController::class,'update'])->name('update');
+    });
 });
+    
 
 Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/home',[UserProductController::class,'home'])->name('home');

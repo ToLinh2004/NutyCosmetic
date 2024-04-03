@@ -6,28 +6,43 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Symfony\Component\HttpKernel\Attribute\ValueResolver;
+
 class Users extends Model
 {
     use HasFactory;
     protected $table = 'users';
-    public function getAllUser(){
-        $users =DB::table('users')
-        ->select('users.*')
-        ->get();
-        return($users);
+    public function getAllUser($perPage = 0)
+    {
+        $users = DB::table('users')
+            ->select('users.*')
+            ->where('status', 'Active');
+        if (!empty($perPage)) {
+            $users = $users->paginate($perPage);
+        } else {
+            $users = $users->get();
+        }
+        return ($users);
     }
 
-    public function addUser($data){
-        DB::insert('INSERT INTO users(user_name, email, phone, password, address, image) VALUES (? ,? ,?, ?, ?, ?)', $data);
+    public function addUser($data)
+    {
+        return DB::table($this->table)->insert($data);
     }
-    public function getDetail($id){
-        return DB::select('SELECT * FROM '. $this->table.' WHERE id = ?', [$id]);
+    public function getDetail($id)
+    {
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->get();
     }
-    public function updateUser($data,$id){
-        $data[] =$id ;
-        return DB::update('UPDATE ' . $this->table . ' SET user_name=?, email=?, phone=?, password=?, address=?, status=?, image=? WHERE id=?', $data);
+    public function updateUser($data, $id)
+    {
+        return DB::table($this->table)->where('id', $id)->update($data);
     }
-    public function deleteUser($id){
-        return DB::update('UPDATE '.$this->table.' SET status = \'Inactive\' WHERE id = ?', [$id]);
+    public function deleteUser($id)
+    {
+        return DB::table($this->table)
+            ->where('id', $id)
+            ->update(['status' => 'Inactive']);
     }
 }

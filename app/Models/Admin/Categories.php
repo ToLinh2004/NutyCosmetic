@@ -12,6 +12,7 @@ class Categories extends Model
     public function getAllCategories(){
         $categories =DB::table('categories')
         ->select('id', 'category_name as category')
+        ->where('status', 'Active')
         ->get();
         return($categories);
     }

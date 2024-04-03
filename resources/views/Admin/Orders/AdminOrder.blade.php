@@ -11,7 +11,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Date</th>
@@ -31,16 +31,18 @@
                             <td>{{ $item->totalprice }}</td>
                             <td>{{ $item->productname }}</td>
                             <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="statusDropdown"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ $item->status }}
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="statusDropdown">
-                                        {{-- @foreach ($orderStatuses as $status)
-                                            <a class="dropdown-item"
-                                                href="{{ route('admin.update_status', ['order_id' => $item->id, 'status' => $status->id]) }}">{{ $status->status_name }}</a>
-                                        @endforeach --}}
+                                <div class="mb-3 row">
+                                    <div class=" col-sm-6">
+                                        <form action="{{route('admin.order.update', ['id' => $item->id])}}" method="post">
+                                            @csrf 
+                                            <select class="form-select" name="order_status" aria-label="Default select example" id="status">
+                                                <option>Choose the status of order</option>
+                                                @foreach ($orderStatus as $status)
+                                                    <option value="{{ $status->id }}" {{ $item->status_id == $status->id ? 'selected' : '' }}>{{ $status->status_name }}</option>
+                                                @endforeach  
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3">Update Status</button>
+                                        </form>
                                     </div>
                                 </div>
                             </td>
