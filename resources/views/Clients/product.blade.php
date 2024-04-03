@@ -20,12 +20,29 @@
     </div>
 @endsection
 
+<style>
+    .wishlist_aa{
+        position: relative;
+    }
+    .wishlist_ab{
+        position:absolute;
+        top: 0;
+        right: 2%;
+
+    }
+    .wishlist_ab button{
+        border: 0;
+    }
+</style>
+
 @section('content')
     <div class="container mt-6" style="margin-top: 5%;">
         <h1>All Product</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
             @foreach ($productAll as $product)
-                <div class="col-md-4">
+            
+                <div class="col-md-4 wishlist_aa">
+
                     <form action="" method="post">
                         <div class="card">
                             <a class="text-decoration-none"
@@ -40,6 +57,7 @@
                                     <a href="#">
                                         <button type="submit" class="btn btn-success">Buy now</button>
                                     </a>
+
                                     <input type="hidden" name="PId" value="{{ $product->id }}">
                                     <input type="hidden" name="PName" value="{{ $product->product_name }}">
                                     <input type="hidden" name="Image" value="{{ $product->image_url }}">
@@ -49,6 +67,13 @@
                             </div>
                         </div>
                     </form>
+                    <div class="wishlist_ab">
+                        <form action="{{route('user.wishlist.add')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <button style="submit"><i class="fa-regular fa-heart"></i></button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>
