@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User\Products;
+use Illuminate\Support\Facades\Session;
+
 
 class ProductController extends Controller {
     //
@@ -30,32 +32,78 @@ class ProductController extends Controller {
         $productAll = $this->products->getProductCategory($category_id);
         return view('Clients.product-detail', compact('productDetail', 'productAll'));
     }
-    public function addToCart($id) {
-        // session()->flush('cart');
-        $product = $this->products->getAddToCart($id);
-        $cart = session()->get('cart');
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
-        } else {
-            $cart[$id] = [
-                'name' => $product->product_name,
-                'image' => $product->image_url,
-                'quantity' => 1,
-                'price' => $product->price
-            ];
-        }
-        session()->put('cart', $cart);
-        return  response()->json(
-            [
-                'code' => 200,
-                'message' => ' success',
-            ],
-            status: 200
-        );
-    }
-    public function showCart() {
+    // public function addToCart($id) {
+    //     // session()->flush('cart');
+    //     $product = $this->products->getAddToCart($id);
+    //     $cart = session()->get('cart');
+    //     if (isset($cart[$id])) {
+    //         $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
+    //     } else {
+    //         $cart[$id] = [
+    //             'name' => $product->product_name,
+    //             'image' => $product->image_url,
+    //             'quantity' => 1,
+    //             'price' => $product->price
+    //         ];
+    //     }
+    //     session()->put('cart', $cart);
+    //     return  response()->json(
+    //         [
+    //             'code' => 200,
+    //             'message' => ' success',
+    //         ],
+    //         status: 200
+    //     );
+    // }
+    // public function showCart() {
 
-        $carts = session()->get('cart');
+    //     $carts = session()->get('cart');
+    //     return view('Clients.add-to-cart', compact('carts'));
+    // }
+
+    public function addToCart($id)
+    {
+
+        if (Session::has('user_id')) {
+            $userId = Session::get('user_id');
+            $product = $this->products->getAddToCart($id);
+            $cart = session()->get('cart_userId'.$userId, []);
+
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity'] += 1;
+            } else {
+                $cart[$id] = [
+                    'product_id' => $product->id,
+                    'name' => $product->product_name,
+                    'image' => $product->image_url,
+                    'quantity' => 1,
+                    'price' => $product->price
+                ];
+            }
+            session()->put('cart_userId'.$userId, $cart);
+            return response()->json([
+                'code' => 200,
+                'message' => 'Thêm sản phẩm vào giỏ hàng thành công'
+            ], 200);
+        }
+    }
+
+    public function showCart(){
+
+        $userId = Session::get('user_id');
+        $carts = session()->get('cart_userId'.$userId, []);
         return view('Clients.add-to-cart', compact('carts'));
+    }
+    public function deleteCart($id)
+        {
+            if (Session::has('user_id')) {
+                $userId = Session::get('user_id');
+                $cart = session()->get('cart_userId'.$userId, []);
+                if (isset($cart[$id])) {
+                    unset($cart[$id]);
+                    session()->put('cart_userId'.$userId, $cart);
+                    return redirect()->route('user.show-cart');
+                }
+            }
     }
 }

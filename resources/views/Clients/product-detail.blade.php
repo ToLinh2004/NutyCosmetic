@@ -13,8 +13,9 @@
                             {{ $productDetail->price }}</span></p>
                 </div>
                 <div class="product-price-btn d-flex">
-                    <button type="submit" name="addcart" style="width: 200px;">add to cart</button>
-                    <button type="submit">buy now</button>
+                    <a href="{{ route('user.add-to-cart', ['id' => $productDetail->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $productDetail->id]) }}" style="padding-left: 10px;border-radius: 25px;  width:150px; height:50px;">Add to cart</a>
+                    <a href="" class="btn btn-success add-to-cart" style="padding-left: 10px;border-radius: 25px;  width:150px; height:50px; margin-left:50px ;">Add to cart</a>
+
                 </div>
             </div>
         </div>
@@ -36,8 +37,7 @@
                                         <h5 class="card-title">{{ $product->product_name }}</h5>
                                         <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                         <div>
-                                            <button type="submit" name="addcart" class="btn btn-success">Add to
-                                                cart</button>
+                                            <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
                                             <a href=""><button type="submit" class="btn btn-success">Buy
                                                     now</button></a>
                                         </div>
@@ -67,8 +67,7 @@
                                         <h5 class="card-title">{{ $product->product_name }}</h5>
                                         <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                         <div>
-                                            <button type="submit" name="addcart" class="btn btn-success">Add to
-                                                cart</button>
+                                            <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
                                             <a href=""><button type="submit" class="btn btn-success">Buy
                                                     now</button></a>
                                         </div>
@@ -81,4 +80,6 @@
             </div>
         </div>
     @endif
+    <script src="{{asset('js/product.js')}}"></script>
+
 @endsection

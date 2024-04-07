@@ -22,14 +22,14 @@ class Products extends Model
         return $productsPopular;
     }
     public function getProductDetail($id)
-    { 
+    {
         $productDetail = Products::find($id);
         return $productDetail;
     }
     public function getCategory($typeCategory) {
         $products = Products::where('category_id',$typeCategory->id)->get();
         return $products;
-        
+
     }
     public function getProductCategory($typeCategory) {
         $products = Products::where('category_id',$typeCategory)->get();

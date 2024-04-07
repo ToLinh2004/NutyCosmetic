@@ -8,15 +8,15 @@
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-12"> 
+        <div class="col-12">
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Img Sản phẩm</th>
-                    <th scope="col">Sản phẩm</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Giá</th>
-                    <th scope="col">Xóa</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
