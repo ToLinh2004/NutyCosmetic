@@ -10,6 +10,8 @@ use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
 use App\Http\Controllers\User\wishlistController;
+use App\Http\Controllers\User\ContactController as UserContactController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +65,15 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/delete/{id}', [AdminCategoriesController::class, 'destroy'])->name('delete');
     });
     // order
-    Route::get('/order', [AdminOrderController::class, 'index'])->name('orders');
+    Route::prefix('/order') ->name('order.')->group(function(){
+        Route::get('/', [AdminOrderController::class,'index'])->name('index');
+        Route::post('/update',[AdminOrderController::class,'update'])->name('update');
+    });
+    Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
+    Route::put('/contact/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
+
 });
-    
+
 
 Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/home', [UserProductController::class, 'home'])->name('home');
@@ -74,6 +82,9 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/category/{id}', [UserCategoriesController::class, 'getCategoryDetail'])->name('category-detail');
     Route::get('/add-to-cart/{id}', [UserProductController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/show-cart', [UserProductController::class, 'showCart'])->name('show-cart');
+    Route::delete('/delete-cart/{id}', [UserProductController::class, 'deleteCart'])->name('delete-cart');
+    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
+    Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
 
     Route::get('/wishlist_all', [wishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist', [wishlistController::class, 'wishlistAdd'])->name('wishlist.add');
