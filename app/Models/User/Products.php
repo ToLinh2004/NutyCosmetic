@@ -13,12 +13,12 @@ class Products extends Model
 
     public function getAllProducts()
     {
-        $productAll=Products::all();
-        return  $productAll;
+        $productAll = Products::where('status', '!=', 'inactive')->get();
+        return $productAll;
     }
     public function getProductPopular()
     {
-        $productsPopular = DB::select('SELECT * FROM products ORDER BY quantity ASC limit 8');
+        $productsPopular = DB::select('SELECT * FROM products WHERE status != "inactive" ORDER BY quantity ASC LIMIT 8');
         return $productsPopular;
     }
     public function getProductDetail($id)

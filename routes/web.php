@@ -12,7 +12,6 @@ use App\Http\Controllers\User\DashboardUserController as UserDashboardUserContro
 use App\Http\Controllers\User\wishlistController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +22,6 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -73,8 +71,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::put('/contact/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
 
 });
-
-
 Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/home', [UserProductController::class, 'home'])->name('home');
     Route::get('/product', [UserProductController::class, 'getAllProduct'])->name('all-product');
@@ -85,7 +81,6 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::delete('/delete-cart/{id}', [UserProductController::class, 'deleteCart'])->name('delete-cart');
     Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
     Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
-
     Route::get('/wishlist_all', [wishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist', [wishlistController::class, 'wishlistAdd'])->name('wishlist.add');
     Route::delete('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
