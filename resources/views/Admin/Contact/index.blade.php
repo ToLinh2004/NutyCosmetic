@@ -42,13 +42,13 @@
                                         <option value="Not Contacted">Status</option>
                                         <option value="Contacted" {{ request()->status == 'Contacted' ? 'selected' : '' }}>Contact</option>
                                         <option value="Not Contact" {{ request()->status == 'Not Contact' ? 'selected' : '' }}>Not  Contact</option>
-                                    </select>                                    
+                                    </select>
                             </td>
                             <td style="padding-top:15px">
                                 @if($item->status =='Contacted')
-                                    <span class="text-danger">{{ $item->status }}</span>
+                                    <span class="text-success">{{ $item->status }}</span>
                                 @else
-                                <span class="text-success" style="padding-top:20px">{{ $item->status }}</span>
+                                <span class="text-danger" style="padding-top:20px">{{ $item->status }}</span>
                                 @endif
                             </td>
                             <td>

@@ -8,11 +8,11 @@
                         <tr >
                             <th>STT</th>
                             <th>Product Name</th>
-                            <th>Image</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total</th>
-                            <th><button type="button" class="btn btn-light btn-light-action" >Action</button></th>
+                            <th  width='20%'>Image</th>
+                            <th  width='10%' >Quantity</th>
+                            <th  width='15%'>Unit Price</th>
+                            <th width='15%'>Total</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,8 +34,20 @@
                                 <td>{{ $cartItem['price'] }}</td>
                                 <td>{{$total}}</td>
                                 <td colspan='2' style="padding-top: 60px">
-                                    <a href="" ><i class='fa-solid fa-trash' style="padding-right:40px;padding-left:15px"></i></a>
-                                    <a href=""><i class="fa-solid fa-pen"></i></a>
+                                    <div style="display:flex">
+                                    <form action="{{route('user.delete-cart', ['id' => $cartItem['product_id'] ])}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="button_x">
+                                            <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
+                                        </div>
+                                    </form>
+                                    <form action="">
+                                        <div>
+                                            <button type="submit" style="border: none;background-color:white;"><i class="fa-solid fa-pen"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                                 </td>
                             </tr>
                             @php

@@ -10,10 +10,14 @@ $(function () {
             success: function (data) {
                 if (data.code === 200) {
                     alert("Add Product Success");
-                }
+                } 
             },
-            error: function () {
-                alert("Error occurred");
+            error: function (xhr, status, error) {
+                if (xhr.status === 404) {
+                    alert("Product does not exist");
+                } else {
+                    alert("Error occurred");
+                }
             },
         });
     });
