@@ -20,7 +20,7 @@
         </div>
     </div>
     <a href="">About Us</a>
-    <a href="{{route('user.contact-us')}}">Contact Us</a>
+    <a href="{{route('user.contact_us')}}">Contact Us</a>
 </nav>
 <div class="" >
     <form action="" method="post">

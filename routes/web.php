@@ -10,9 +10,6 @@ use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +20,6 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -81,6 +77,6 @@ Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/category/{id}',[UserCategoriesController::class,'getCategoryDetail'])->name('category-detail');
     Route::get('/add-to-cart/{id}',[UserProductController::class,'addToCart'])->name('add-to-cart');
     Route::get('/show-cart',[UserProductController::class,'showCart'])->name('show-cart');
-    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
+    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact_us');
     Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
 });
