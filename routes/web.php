@@ -65,7 +65,10 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/delete/{id}', [AdminCategoriesController::class, 'destroy'])->name('delete');
     });
     // order
-    Route::get('/order', [AdminOrderController::class, 'index'])->name('order.index');
+    Route::prefix('/order') ->name('order.')->group(function(){
+        Route::get('/', [AdminOrderController::class,'index'])->name('index');
+        Route::post('/update',[AdminOrderController::class,'update'])->name('update');
+    });
     Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
     Route::put('/contact/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
 

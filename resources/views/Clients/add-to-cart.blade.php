@@ -8,11 +8,11 @@
                         <tr >
                             <th>STT</th>
                             <th>Product Name</th>
-                            <th>Image</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total</th>
-                            <th><button type="button" class="btn btn-light btn-light-action" >Action</button></th>
+                            <th  width='20%'>Image</th>
+                            <th  width='10%' >Quantity</th>
+                            <th  width='15%'>Unit Price</th>
+                            <th width='15%'>Total</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
