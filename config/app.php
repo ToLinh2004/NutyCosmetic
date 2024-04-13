@@ -163,6 +163,7 @@ return [
         /*
          * Application Service Providers...
          */
+        // 'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
