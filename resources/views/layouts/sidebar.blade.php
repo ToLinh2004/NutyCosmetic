@@ -21,6 +21,9 @@
         <li style="list-style-type:none" class="mx-4 mt-4">
             <a href="{{route('admin.order.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Orders</a>
         </li>
+        <li style="list-style-type:none" class="mx-4 mt-4">
+            <a href="{{route('admin.banners.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Banners</a>
+        </li>
     </ul>
     <ul class="mt-4">
         <h4><b>ADDONS</b></h4>

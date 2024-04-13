@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\User\Products;
 use Illuminate\Support\Facades\Session;
@@ -10,15 +11,18 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller {
     //
+    
     private $products;
     public function __construct() {
         $this->products = new Products();
     }
 
     public function home() {
+        $banners = Banner::all();
+        // dd($banners);
         $productPopular = $this->products->getProductPopular();
 
-        return view('Clients.home', compact('productPopular'));
+        return view('Clients.home', compact('banners','productPopular'));
     }
 
     public function getAllProduct() {
