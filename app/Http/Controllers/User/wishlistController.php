@@ -30,7 +30,7 @@ class wishlistController extends Controller {
                 ->first();
 
             if ($existingWishlistItem) {
-                toastr('Sản phẩm đã tồn tại trong danh sách yêu thích của bạn!', 'warning');
+                toastr()->warning('Sản phẩm đã tồn tại trong danh sách yêu thích của bạn!');
                 return redirect()->back();
             }
 
@@ -39,11 +39,11 @@ class wishlistController extends Controller {
             $wishlist->user_id = $user_id;
             $wishlist->save();
 
-            toastr('Sản phẩm đã được thêm vào danh sách yêu thích!', 'success');
+            toastr()->success('Sản phẩm đã được thêm vào danh sách yêu thích!');
 
             return redirect()->back();
         } else {
-            toastr('Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích!', 'error');
+            toastr()->error('Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích!');
             return redirect()->route('login');
         }
     }

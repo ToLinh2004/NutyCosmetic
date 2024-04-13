@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model {
     use HasFactory;
+    public $timestamps = false;
     public function Products() {
         return $this->belongsTo(Products::class, 'product_id');
     }

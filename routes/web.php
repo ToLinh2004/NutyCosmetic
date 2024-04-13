@@ -10,6 +10,7 @@ use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
 use App\Http\Controllers\User\wishlistController;
+use App\Http\Controllers\User\BannerController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 /*
@@ -67,9 +68,18 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/', [AdminOrderController::class,'index'])->name('index');
         Route::post('/update',[AdminOrderController::class,'update'])->name('update');
     });
+    // contact
     Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
     Route::put('/contact/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
-
+    // banner
+    Route::prefix('/banners')->name('banners.')->group(function(){
+        Route::get('/',[BannerController::class,'index'])->name('index');
+        Route::get('/add', [BannerController::class, 'create'])->name('add');
+        Route::post('/store', [BannerController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [BannerController::class, 'show'])->name('edit');
+        Route::post('/update', [BannerController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [BannerController::class, 'destroy'])->name('delete');
+    });
 });
 Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/home', [UserProductController::class, 'home'])->name('home');
