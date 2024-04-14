@@ -22,13 +22,15 @@
     <a href="">About Us</a>
     <a href="{{route('user.contact-us')}}">Contact Us</a>
 </nav>
-<div class="" >
-    <form action="" method="post">
-        <input type="text" placeholder="Search" class="border rounded">
-        <i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i>
-        <button class="burger-menu" type="button" onclick="toggleMenu()">&#9776;</button>
+<div id="timkiem" class="col-3 p-2">
+    <form  action="" method="get">
+    <input class="border border-black p-2 col-6" placeholder= "Keyword">
+    <button type="submit" class="btn btn-dark p-2 col-2"><i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i> </button>
     </form>
-</div>
+    <div id="ketquatim">
+       <!-- kết quả tìm kiếm -->
+    </div>
+  </div>
 <div class="icon-nav">
     <div class="item1">
         <a href="{{route('user.show-cart')}}"><i class="fa-solid fa-cart-shopping"
