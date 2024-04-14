@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Models\Admin\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,14 +9,16 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     private $products;
+    const _PER_PAGE =  3;
+    private $categories;
     public function __construct()
     {
         $this->products = new Products;
     }
     public function index()
     {
-        $productList = $this->products->getAllProduct();
-        return view('Admin.Products.AdminProduct', compact('productList'));
+        $productList = $this->products->getAllProduct(self::_PER_PAGE);
+        return view('Admin.Products.Index', compact('productList'));
     }
 
     /**
@@ -40,7 +41,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:1',
                 'image' => 'required|mimes:jpg,jpeg,png',
                 'quantity' => 'required|numeric|min:1',
-                'description' =>'required'
+                'description' => 'required'
             ],
             [
                 'product_name.required' => 'Productname is required.',
@@ -58,16 +59,16 @@ class ProductController extends Controller
         );
         $imageName = time() . '.' . $request->image->extension();
         $dataInsert = [
-            $request->product_name,
-            $request->description,
-            $request->price,
-            $request->image_name,
-            $request->image->move('images', $imageName),
-            $request->quantity,
-            $request->category
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_name' => $request->image_name,
+            'image_url' => $request->image->move('images', $imageName),
+            'quantity' => $request->quantity,
+            'category_id' => $request->category
         ];
         $this->products->addProduct($dataInsert);
-        return redirect()->route('admin.products')->with('msg', 'Product created successfully.');
+        return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
     }
 
     /**
@@ -81,10 +82,10 @@ class ProductController extends Controller
                 $request->session()->put('id', $id);
                 $productDetail = $productDetail[0];
             } else {
-                return redirect()->route('admin.products')->with('msgerror', 'The user does not exist');
+                return redirect()->route('admin.product.index')->with('msgerror', 'The product does not exist');
             }
         } else {
-            return redirect()->route('admin.products')->with('msgerror', 'The user does not exist');
+            return redirect()->route('admin.product.index')->with('msgerror', 'The product does not exist');
         }
         $categories = DB::table('categories')->get();
         return view('Admin.Products.EditProduct', compact('productDetail', 'categories'));
@@ -113,7 +114,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric|min:1',
                 'image' => 'required|mimes:jpg,jpeg,png',
                 'quantity' => 'required|numeric|min:1',
-                'description' =>'required'
+                'description' => 'required'
             ],
             [
                 'product_name.required' => 'Productname is required.',
@@ -131,17 +132,17 @@ class ProductController extends Controller
         );
         $imageName = time() . '.' . $request->image->extension();
         $dataUpdate = [
-            $request->product_name,
-            $request->description,
-            $request->price,
-            $request->image_name,
-            $request->image->move('images', $imageName),
-            $request->quantity,
-            $request->category,
-            $request->status
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image_name' => $request->image_name,
+            'image_url' => $request->image->move('images', $imageName),
+            'quantity' => $request->quantity,
+            'category_id' => $request->category,
+            'status' => $request->status
         ];
         $this->products->updateProduct($dataUpdate, $id);
-        return redirect()->route('admin.products')->with('msg', 'Product created successfully.');
+        return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
     }
     /**
      * Remove the specified resource from storage.
@@ -152,25 +153,7 @@ class ProductController extends Controller
         $product->status = 'inactive';
         $product->deleteProduct($id); 
         
-        return redirect()->route('admin.products')->with('msg', 'Deleted product successfully.');
+        return redirect()->route('admin.product.index')->with('msg', 'Deleted product successfully.');
     }
-    public function home()
-    {
-        $productPopular = $this->products->getProductPopular();
-
-        return view('Clients.home', compact('productPopular'));
-    }
-
-    public function getAllProduct()
-    {
-        $productAll = $this->products->getAllProducts();
-        return view('Clients.product', compact('productAll'));
-    }
-
-    public function productDetail($id, $category_id)
-    {
-        $productDetail = Products::find($id);
-        $productAll = $this->products->getProductCategory($category_id);
-        return view('Clients.product-detail', compact('productDetail', 'productAll'));
-    }
+   
 }

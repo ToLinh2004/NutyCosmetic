@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use \App\Models\Admin\Categories;
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
                 'category'=> Categories::all(),
             ]);
         });
-
+        Paginator::useBootstrapFive();
     }
 }

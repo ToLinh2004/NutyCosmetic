@@ -10,7 +10,7 @@
     @if (session('msg'))
         <div class="alert alert-success">{{ session('msg') }}</div>
     @endif
-    <a href="{{ route('admin.addproduct') }}">
+    <a href="{{ route('admin.product.add') }}">
         <div class="buttonAddProduct">
             <button type="submit" class="btn btn-success mx-3">
                 Add Product
@@ -22,7 +22,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col" style="width:15%">Product Name</th>
                     <th scope="col">Description</th>
                     <th scope="col" style="width:10%">Image</th>
@@ -47,9 +47,9 @@
                             <td>{{ $item->status }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('admin.editproduct', ['id' => $item->id]) }}"
+                                    <a href="{{ route('admin.product.edit', ['id' => $item->id]) }}"
                                         class="mx-3 btn btn-warning btn-sm">Edit</a>
-                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{route('admin.deleteproduct',['id' => $item->id])}}"
+                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{route('admin.product.delete',['id' => $item->id])}}"
                                         class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>
@@ -60,4 +60,5 @@
         </table>
     </div>
 </div>
+{{$productList->links()}}
 @endsection

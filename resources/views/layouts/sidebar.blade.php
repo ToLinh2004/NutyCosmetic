@@ -3,19 +3,26 @@
     <ul class="mt-4">
         <h4><b>CORE</b></h4>
         <li style="list-style-type:none" class="mx-4 mt-4">
-            <a href="{{route('admin.products')}}" style="font-size: 18px" class="text-decoration-none text-black">Products</a>
+            <a href="{{route('admin.product.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Products</a>
         </li>
         <li style="list-style-type:none" class="mx-4 mt-4">
-            <a href="{{route('admin.categories')}}" style="font-size: 18px" class="text-decoration-none text-black">Category</a>
+            <a href="{{route('admin.category.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Category</a>
         </li>
+        <li style="list-style-type:none" class="mx-4 mt-4">
+            <a href="{{route('admin.contact')}}" style="font-size: 18px" class="text-decoration-none text-black">Contacts</a>
+        </li>
+
     </ul>
     <ul class="mt-4">
         <h4><b>INTERFACE</b></h4>
         <li style="list-style-type:none" class="mx-4 mt-4">
-            <a href="{{route('admin.user')}}" style="font-size: 18px" class="text-decoration-none text-black">Users</a>
+            <a href="{{route('admin.user.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Users</a>
         </li>
         <li style="list-style-type:none" class="mx-4 mt-4">
-            <a href="{{route('admin.orders')}}" style="font-size: 18px" class="text-decoration-none text-black">Orders</a>
+            <a href="{{route('admin.order.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Orders</a>
+        </li>
+        <li style="list-style-type:none" class="mx-4 mt-4">
+            <a href="{{route('admin.banners.index')}}" style="font-size: 18px" class="text-decoration-none text-black">Banners</a>
         </li>
     </ul>
     <ul class="mt-4">

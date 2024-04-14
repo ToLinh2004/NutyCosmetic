@@ -20,18 +20,20 @@
         </div>
     </div>
     <a href="">About Us</a>
-    <a href="">Contact Us</a>
+    <a href="{{route('user.contact-us')}}">Contact Us</a>
 </nav>
-<div class="search-container">
-    <form action="" method="post">
-        <input type="text" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <button class="burger-menu" type="button" onclick="toggleMenu()">&#9776;</button>
+<div id="timkiem" class="col-3 p-2">
+    <form  action="" method="get">
+    <input class="border border-black p-2 col-6" placeholder= "Keyword">
+    <button type="submit" class="btn btn-dark p-2 col-2"><i class="fa-solid fa-magnifying-glass" style="padding-left: 10px"></i> </button>
     </form>
-</div>
+    <div id="ketquatim">
+       <!-- kết quả tìm kiếm -->
+    </div>
+  </div>
 <div class="icon-nav">
     <div class="item1">
-        <a href=""><i class="fa-solid fa-cart-shopping"
+        <a href="{{route('user.show-cart')}}"><i class="fa-solid fa-cart-shopping"
                 style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
     </div>
 
@@ -43,9 +45,13 @@
         </a>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="">Register</a></li>
-        <li><a class="dropdown-item" href="">Login</a></li>
-        <li><a class="dropdown-item" href="">Logout</a></li>
-        <li><a class="dropdown-item" href="">Profile</a></li>
+        @if (session()->has('user_id'))
+            <li><a class="dropdown-item" href="{{ route('dashboard.user') }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+            <li><a class="dropdown-item" href="{{route('user.wishlist.index')}}">Wishlist</a></li>
+        @else
+            <li><a class="dropdown-item" href="{{ route('registerUser') }}">Register</a></li>
+            <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
+        @endif
     </ul>
 </div>

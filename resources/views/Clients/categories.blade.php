@@ -22,6 +22,7 @@
 
 @section('content')
     <div class="container mt-6" style="margin-top: 5%;">
+        @if(isset($typeCategory))
         <h1>{{$typeCategory->category_name}}</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
             @foreach ($products as $product)
@@ -35,7 +36,7 @@
                                     <h5 class="card-title">{{ $product->product_name }}</h5>
                                     <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                     <div>
-                                        <button type="submit" name="addcart" class="btn btn-success">Add to cart</button>
+                                        <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
                                         <a href=""><button type="submit" class="btn btn-success">Buy now</button></a>
                                     </div>
                                 </div>
@@ -44,5 +45,8 @@
                     </div>
             @endforeach
         </div>
+        @endif
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{asset('js/product.js')}}"></script>
 @endsection

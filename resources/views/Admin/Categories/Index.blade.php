@@ -5,19 +5,21 @@
 @section('card')
     <div>
     @section('title')
-        <h1 class="text-center title">CATEGORY</h1>
+        <h1 class="text-center title">CATEGORYS</h1>
     @endsection
     <div class="buttonAddCategory">
-        <button type="submit" class="btn btn-success mx-3">
-            Add Category
-            <i class="fa fa-plus"></i>
-        </button>
+        <a href="{{ route('admin.category.add') }}">
+            <button type="submit" class="btn btn-success mx-3">
+                Add Categries
+                <i class="fa fa-plus"></i>
+            </button>   
+        </a>
     </div>
     <div class="tableCategory mt-5">
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col">Category Name</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -30,9 +32,8 @@
                             <td>{{ $item->category }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="" class="mx-3 btn btn-warning btn-sm">Edit</a>
-                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="#"
-                                        class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{route('admin.category.edit', ['id' => $item->id])}}" class="btn btn-warning btn-sm mx-3">Edit</a>
+                                    <a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin.category.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>
                         </tr>
