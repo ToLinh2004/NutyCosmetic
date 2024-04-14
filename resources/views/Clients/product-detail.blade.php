@@ -75,6 +75,8 @@
                                 </div>
                             </form>
                         </div>
+                        <div id="notification" style="display: none;"></div>
+
                     {{-- @endif --}}
                 @endforeach
             </div>

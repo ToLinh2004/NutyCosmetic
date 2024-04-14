@@ -77,6 +77,7 @@
                 </div>
             @endforeach
         </div>
+        <div id="notification" style="display: none;"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{asset('js/product.js')}}"></script>
