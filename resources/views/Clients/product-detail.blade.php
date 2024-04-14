@@ -29,6 +29,9 @@
                         <div class="col-md-4">
                             <form action="" method="post">
                                 <div class="card">
+                                    @if($product->status_discount === 'discount')
+                                    <span style="color: red">Sale off 30%</span>
+                                 @endif
                                     <a class="text-decoration-none"
                                         href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
                                         <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
@@ -58,7 +61,9 @@
                         <div class="col-md-4">
                             <form action="" method="post">
                                 <div class="card">
-
+                                    @if($product->status_discount === 'discount')
+                                    <span style="color: red">Sale off 30%</span>
+                                    @endif
                                     <a class="text-decoration-none"
                                         href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
                                         <img src="{{ $product->image_url }}" class="card-img-top" alt="...">

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller {
     //
-    
+
     private $products;
     public function __construct() {
         $this->products = new Products();
@@ -56,7 +56,10 @@ class ProductController extends Controller {
                     'code' => 404,
                 ], 404);
             }
-
+            $discountedProduct = $product->price;
+            if ($product->status_discount === "discount") {
+                $discountedProduct = $product->price * (1 - 0.3);
+            }
             $cart = session()->get('cart_userId'.$userId, []);
 
             if (isset($cart[$id])) {
@@ -67,7 +70,7 @@ class ProductController extends Controller {
                     'name' => $product->product_name,
                     'image' => $product->image_url,
                     'quantity' => 1,
-                    'price' => $product->price
+                    'price' => $discountedProduct
                 ];
             }
             session()->put('cart_userId'.$userId, $cart);

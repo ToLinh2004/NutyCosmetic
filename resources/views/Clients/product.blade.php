@@ -40,11 +40,14 @@
         <h1>All Product</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
             @foreach ($productAll as $product)
-            
+
                 <div class="col-md-4 wishlist_aa">
 
                     <form action="" method="post">
                         <div class="card">
+                            @if($product->status_discount === 'discount')
+                                <span style="color: red">Sale off 30%</span>
+                             @endif
                             <a class="text-decoration-none"
                                 href="{{ route('user.product-detail', ['id' => $product->id, 'category_id' => $product->category_id]) }}">
                                 <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
