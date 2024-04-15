@@ -9,12 +9,20 @@
     </div>
     <div class="dropdown">
         <a class="dropdown-toggle me-3" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src='{{ asset('images/user.png') }}' alt="" id="output" class="rounded-circle"
-                style="width:28px;height:28px;margin-right: 30px;margin-top:0px">
+            @if (session()->has('user_id') && session()->has('image'))
+                @php
+                    $image = session('image');
+                @endphp
+                <img src='{{ $image }}' alt="" id="output" class="rounded-circle"
+                    style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+            @else
+                <img src='{{ asset('images/user.png') }}' alt="" id="output" class="rounded-circle"
+                    style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+            @endif
         </a>
         <ul class="dropdown-menu me-3" aria-labelledby="dropdownMenuButton1">
             @if (session()->has('user_id'))
-                <li><a class="dropdown-item me-3" href="">Profile</a></li>
+                <li><a class="dropdown-item me-3" href="{{ route('dashboard.user') }}">Profile</a></li>
                 <li><a class="dropdown-item me-3" href="{{ route('logout') }}">Logout</a></li>
             @else
                 <li><a class="dropdown-item me-3" href="{{ route('registerUser') }}">Register</a></li>
