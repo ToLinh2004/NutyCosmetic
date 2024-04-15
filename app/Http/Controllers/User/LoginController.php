@@ -25,6 +25,9 @@ class LoginController extends Controller {
         if (!$user) {
             return redirect()->back()->with('error', 'Email invalid');
         }
+        if ($user->status === 'inactive') {
+            return redirect()->back()->with('error', 'Tài khoản của bạn đang bị vô hiệu hóa.');
+        }        
         if ($userPass) {
             Session::put('user_id', $user->id);
             Session::put('email', $user->email);
