@@ -8,40 +8,41 @@ use App\Models\Admin\Users;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     private $users;
-    public function __construct()
-    {
-        $this ->users =new Users();
+    public function __construct() {
+        $this->users = new Users();
     }
 
-    public function showLogin(){
+    public function showLogin() {
         return view('FE/pages/auth/login');
     }
-    public function loginUser(Request $request){
+    public function loginUser(Request $request) {
         $email = $request->input('email');
         $password = $request->input('password');
         $user = Users::where('email', $email)->first();
         $userPass = Users::where('password', $password)->first();
-        if (!$user){
+        if (!$user) {
             return redirect()->back()->with('error', 'Email invalid');
         }
-        if ($userPass){
+        if ($userPass) {
             Session::put('user_id', $user->id);
             Session::put('email', $user->email);
+            Session::put('user_name', $user->user_name);
+            Session::put('phone', $user->phone);
+            Session::put('image', $user->image);
+            Session::put('address', $user->address);
             Session::put('role', $user->role);
-            if($user->role == 'admin') return redirect()->route('admin.Homepage')->with('msg', 'Login successful');
+            if ($user->role == 'admin') return redirect()->route('admin.Homepage')->with('msg', 'Login successful');
             return redirect()->route('home');
-        }
-        else return redirect() ->back()->with('error', 'Password incorrect');
+        } else return redirect()->back()->with('error', 'Password incorrect');
     }
-    public function create()
-    {
+
+    public function create() {
         return view('FE/pages/auth/register');
     }
-    public function store(Request $request)
-    {
+
+    public function store(Request $request) {
         $request->validate(
             [
                 'user_name' => 'required|min:5',
@@ -83,32 +84,28 @@ class LoginController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
-    {
+    public function destroy(Request $request) {
         Session::forget('user_id');
         Session::forget('email');
         return redirect()->route('user.home');

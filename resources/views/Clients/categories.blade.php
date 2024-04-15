@@ -51,6 +51,13 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="wishlist_ab">
+                            <form action="{{route('user.wishlist.add')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <button style="submit"><i class="fa-regular fa-heart"></i></button>
+                            </form>
+                        </div>
                     </div>
             @endforeach
         </div>
