@@ -40,4 +40,10 @@ class Products extends Model
         $product = Products::find($id);
         return $product;
     }
+    public function getAllProductSaleOff()
+    {
+        $productAllSaleOff = Products::where('status_discount', '=', 'discount')->
+        where('status', '!=', 'inactive')->get();
+        return $productAllSaleOff;
+    }
 }
