@@ -20,21 +20,6 @@
     </div>
 @endsection
 
-<style>
-    .wishlist_aa{
-        position: relative;
-    }
-    .wishlist_ab{
-        position:absolute;
-        top: 0;
-        right: 2%;
-
-    }
-    .wishlist_ab button{
-        border: 0;
-    }
-</style>
-
 @section('content')
     <div class="container mt-6" style="margin-top: 5%;">
         <h1>All Product</h1>

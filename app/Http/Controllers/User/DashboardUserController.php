@@ -5,15 +5,23 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Models\Admin\Users;
 
 class DashboardUserController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $profiles = Auth::user();
 
-        return view('FE.pages.dashboard.profile', compact('profiles'));
+    public function index() {
+        $userId = session('user_id');
+        $email = session('email');
+        $role = session('role');
+        $phone = session('phone');
+        $user_name = session('user_name');
+        $image = session('image');
+        $address = session('address');
+        return view('FE.pages.dashboard.profile', compact('userId', 'email', 'role', 'phone', 'user_name', 'image', 'address'));
     }
 
     /**
@@ -41,20 +49,47 @@ class DashboardUserController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(string $id) {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $request->validate([
+            'user_name' => ['max:100'],
+            'email' => ['email'],
+            'phone' => ['max:200'],
+            'address' => ['max:200']
+        ]);
+
+        $user = Users::findOrFail($id);
+
+        $user->user_name = $request->user_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+
+        $user->save();
+
+        Session::put('email', $user->email);
+        Session::put('user_name', $user->user_name);
+        Session::put('phone', $user->phone);
+        Session::put('address', $user->address);
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin người dùng thành công.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id) {
         //
+    }
+
+    public function destroy_session() {
+
+        Session::flush();
+        return redirect()->route('login');
     }
 }
