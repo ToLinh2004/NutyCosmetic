@@ -151,9 +151,9 @@ class ProductController extends Controller
     {
         $product = $this->products::findOrFail($id);
         $product->status = 'inactive';
-        $product->deleteProduct($id); 
-        
+        $product->deleteProduct($id);
+
         return redirect()->route('admin.product.index')->with('msg', 'Deleted product successfully.');
     }
-   
+
 }
