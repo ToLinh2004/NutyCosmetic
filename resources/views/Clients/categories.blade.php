@@ -35,7 +35,7 @@
         <h1>{{$typeCategory->category_name}}</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
             @foreach ($products as $product)
-                    <div class="col-md-4">
+                    <div class="col-md-4  wishlist_aa">
                         <form action="" method="post">
                             <div class="card">
                                 <a class="text-decoration-none" href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">

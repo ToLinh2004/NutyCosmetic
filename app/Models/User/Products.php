@@ -27,8 +27,12 @@ class Products extends Model
         return $productDetail;
     }
     public function getCategory($typeCategory) {
-        $products = Products::where('category_id',$typeCategory->id)->get();
-        return $products;
+        if ($typeCategory) {
+            $products = Products::where('category_id', $typeCategory->id)
+                                ->where('status', '!=', 'inactive')
+                                ->get();
+            return $products;
+        }
 
     }
     public function getProductCategory($typeCategory) {

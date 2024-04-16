@@ -11,7 +11,9 @@ class Categories extends Model
     protected $table = 'categories';
     public function getCategoryDetail($id)
     {
-        $typeCategory=Categories::find($id); // tìm khóa chính
+        $typeCategory = Categories::where('id', $id)
+                                 ->where('status', '!=', 'inactive')
+                                ->first();   // tìm khóa chính
         return $typeCategory;
-    }   
+    }
 }
