@@ -1,8 +1,11 @@
 @extends('layouts.masterLayoutClient')
 @section('content')
+@php
+$user_id = Session::get('user_id')   
+@endphp
 <div class="container">
     <div class="row">
-        <div class="col-xl-8">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body">
                     <ol class="activity-checkout mb-0 px-4 mt-3">
@@ -16,7 +19,8 @@
                                 <div>
                                     <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
                                     <div class="mb-3">
-                                        <form method="post" action="?controller=checkout&action=processCheckout&page=customer">
+        
+                                        <form method="post" action="#">
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
@@ -59,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4">
+        <div class="col-6">
             <div class="card checkout-order-summary">
                 <div class="card-body">
                     <div class="p-3 bg-light mb-3">
@@ -75,32 +79,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $cartItems = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
-                                $subtotal = 0;
-                                ?>
-                                <?php
-                                foreach ($cartItems as $product_id => $item) :
+                                @php
+                                    $totalAll = 0;
+                                    $index = 0;
+                                @endphp
+                                @foreach ($carts as $index => $cartItem)
+                                    @php
+                                        $total = $cartItem['price'] * $cartItem['quantity'];
+                                        $totalAll += $total;
+                                    @endphp
+                                        <tr>
+                                            <th scope="row"><img src="{{ $cartItem['image'] }}" alt="product-img" title="product-img" style="width: 200px"></th>
+                                            <td>
+                                                <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{ $cartItem['name'] }}</a></h5>
 
-                                    $subtotal += $item['price'] * ($item['quantity']+1);
-                                ?>
-                                    <tr>
-                                        <th scope="row"><img src="<?php echo $item['image'] ?>" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-                                        <td>
-                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark"><?php echo $item['name'] ?></a></h5>
-
-                                            <p class="text-muted mb-0 mt-1"><?php echo $item['price'] ?> VNĐ x <?php echo $item['quantity']+1 ?></p>
-                                        </td>
-                                        <td> <?php echo ($item['price'] * $item['quantity']) ?> VNĐ </td>
-                                    </tr>
-                                <?php endforeach ?>
+                                                <p class="text-muted mb-0 mt-1">{{ $cartItem['price'] }} VNĐ x {{ $cartItem['quantity'] }}</p>
+                                            </td>
+                                            <td> {{ $total }} VNĐ </td>
+                                        </tr>
+                                 @endforeach
 
                                 <tr>
                                     <td colspan="2">
                                         <h5 class="font-size-14 m-0">Tổng thu :</h5>
                                     </td>
                                     <td>
-                                        <?= $subtotal; ?> VNĐ
+                                        {{ $totalAll }} VNĐ
                                     </td>
                                 </tr>
                                 <tr class="bg-light">
@@ -108,7 +112,7 @@
                                         <h5 class="font-size-14 m-0">Tổng thanh toán:</h5>
                                     </td>
                                     <td>
-                                    <?= $subtotal; ?> VNĐ
+                                        {{ $totalAll }} VNĐ
                                     </td>
                                 </tr>
                             </tbody>
@@ -120,5 +124,4 @@
     </div>
 </div>
     <script src="{{asset('js/product.js')}}"></script>
-
 @endsection
