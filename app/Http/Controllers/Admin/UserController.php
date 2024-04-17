@@ -51,7 +51,7 @@ class UserController extends Controller
         $request->validate(
             [
                 'user_name' => 'required|min:5',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email',
                 'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
                 'phone' => 'digits:10',
                 'address' => 'string',
@@ -62,7 +62,6 @@ class UserController extends Controller
                 'user_name.min' => 'Username must be at least :min characters.',
                 'email.required' => 'Email is required.',
                 'email.email' => 'Email must be a valid email address.',
-                'email.unique' => 'Email has already been taken.',
                 'password.required' => 'Password is required.',
                 'password.string' => 'Password must be a string.',
                 'password.min' => 'Password must be at least :min characters.',

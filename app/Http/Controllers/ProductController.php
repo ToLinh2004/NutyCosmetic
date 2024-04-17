@@ -17,7 +17,6 @@ class ProductController extends Controller
     
     public function index()
     {
-       
         $productPopular=$this->products->getProductPopular();
         return view('home.index', compact('productPopular'));
     }

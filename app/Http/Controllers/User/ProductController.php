@@ -21,14 +21,16 @@ class ProductController extends Controller {
         $banners = Banner::all();
         // dd($banners);
         $productPopular = $this->products->getProductPopular();
-
-        return view('Clients.home', compact('banners','productPopular'));
+        $productSaleOff=$this->products->getAllProductSaleOff();
+        // dd($productSaleOff);
+        return view('Clients.home', compact('banners','productPopular','productSaleOff'));
     }
 
     public function getAllProduct() {
         $productAll = $this->products->getAllProducts();
+        $banners = Banner::all();
 
-        return view('Clients.product', compact('productAll'));
+        return view('Clients.product', compact('banners','productAll'));
     }
 
     public function productDetail($id, $category_id) {

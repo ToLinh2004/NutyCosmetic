@@ -139,7 +139,8 @@ class ProductController extends Controller
             'image_url' => $request->image->move('images', $imageName),
             'quantity' => $request->quantity,
             'category_id' => $request->category,
-            'status' => $request->status
+            'status' => $request->status,
+            'status_discount' => $request->status_discount
         ];
         $this->products->updateProduct($dataUpdate, $id);
         return redirect()->route('admin.product.index')->with('msg', 'Product created successfully.');
@@ -151,9 +152,9 @@ class ProductController extends Controller
     {
         $product = $this->products::findOrFail($id);
         $product->status = 'inactive';
-        $product->deleteProduct($id); 
-        
+        $product->deleteProduct($id);
+
         return redirect()->route('admin.product.index')->with('msg', 'Deleted product successfully.');
     }
-   
+
 }

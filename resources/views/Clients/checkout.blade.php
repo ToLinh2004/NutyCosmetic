@@ -19,25 +19,24 @@ $user_id = Session::get('user_id')
                                 <div>
                                     <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
                                     <div class="mb-3">
-        
                                         <form method="post" action="#">
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="billing-name">Tên</label>
-                                                        <input type="text" name="billing-name" class="form-control" id="billing-name" placeholder="Nhập tên">
+                                                        <input type="text" name="billing-name" class="form-control" id="billing-name" value="{{Session::get('user_name') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="billing-email-address">Email</label>
-                                                        <input type="email" name="billing-email-address" class="form-control" id="billing-email-address" placeholder="Nhập Email">
+                                                        <input type="email" name="billing-email-address" class="form-control" id="billing-email-address" value="{{ Session::get('email') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="billing-phone">Số điện thoại</label>
-                                                        <input type="text" class="form-control" name="billing-phone" id="billing-phone" placeholder="Nhập SĐT">
+                                                        <input type="text" class="form-control" name="billing-phone" id="billing-phone" value="{{ Session::get('phone') }}">
                                                     </div>
                                                 </div>
                                             </div>

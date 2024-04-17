@@ -27,8 +27,12 @@ class Products extends Model
         return $productDetail;
     }
     public function getCategory($typeCategory) {
-        $products = Products::where('category_id',$typeCategory->id)->get();
-        return $products;
+        if ($typeCategory) {
+            $products = Products::where('category_id', $typeCategory->id)
+                                ->where('status', '!=', 'inactive')
+                                ->get();
+            return $products;
+        }
 
     }
     public function getProductCategory($typeCategory) {
@@ -39,5 +43,11 @@ class Products extends Model
     public function getAddToCart($id){
         $product = Products::find($id);
         return $product;
+    }
+    public function getAllProductSaleOff()
+    {
+        $productAllSaleOff = Products::where('status_discount', '=', 'discount')->
+        where('status', '!=', 'inactive')->get();
+        return $productAllSaleOff;
     }
 }

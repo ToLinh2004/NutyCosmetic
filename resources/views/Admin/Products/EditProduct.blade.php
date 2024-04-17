@@ -83,6 +83,19 @@
                         <span style="color:red">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="form-group mb-3">
+                    <label for="status_discount">Discount Status:</label>
+                    <select class="form-control" name="status_discount">
+                        <option value="Discount"
+                            {{ (old('status_discount') ?? $productDetail->status_discount) == 'Discount' ? 'selected' : '' }}>Discount</option>
+                        <option value="No Discount"
+                            {{ (old('status_discount') ?? $productDetail->status_discount) == 'No discount' ? 'selected' : '' }}>No Discount
+                        </option>
+                    </select>
+                    @error('status')
+                        <span style="color:red">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div>
                     <button type="submit" class="btn btn-primary mb-3 me-3">Edit Product</button>
                     <a href="{{ route('admin.product.index') }}" class="btn btn-warning mb-3">Back</a>

@@ -11,6 +11,7 @@ use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\DashboardUserController as UserDashboardUserController;
 use App\Http\Controllers\User\wishlistController;
 use App\Http\Controllers\User\BannerController;
+use App\Http\Controllers\User\UserDashboardOrderController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 /*
@@ -33,7 +34,11 @@ Route::get('/loginUser', [UserLoginController::class, 'showLogin'])->name('login
 Route::post('/loginUser', [UserLoginController::class, 'loginUser'])->name('loginUser');
 Route::get('/logout', [UserLoginController::class, 'destroy'])->name('logout');
 Route::get('/dashboard_user', [UserDashboardUserController::class, 'index'])->name('dashboard.user');
+Route::post('/profile/update/{id}', [UserDashboardUserController::class, 'update'])->name('profile.update');
 
+Route::get('/user_order', [UserDashboardOrderController::class, 'index'])->name('dashboard.order');
+
+Route::get('/logout_session', [UserDashboardUserController::class, 'destroy_session'])->name('logout_session');
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('Admin.Adminhomepage');
@@ -64,16 +69,16 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/delete/{id}', [AdminCategoriesController::class, 'destroy'])->name('delete');
     });
     // order
-    Route::prefix('/order') ->name('order.')->group(function(){
-        Route::get('/', [AdminOrderController::class,'index'])->name('index');
-        Route::post('/update',[AdminOrderController::class,'update'])->name('update');
+    Route::prefix('/order')->name('order.')->group(function () {
+        Route::get('/', [AdminOrderController::class, 'index'])->name('index');
+        Route::post('/update', [AdminOrderController::class, 'update'])->name('update');
     });
     // contact
-    Route::get('/contact',[AdminContactController::class,'show'])->name('contact');
-    Route::put('/contact/{id}',[AdminContactController::class,'updateStatus'])->name('updateStatus');
+    Route::get('/contact', [AdminContactController::class, 'show'])->name('contact');
+    Route::put('/contact/{id}', [AdminContactController::class, 'updateStatus'])->name('updateStatus');
     // banner
-    Route::prefix('/banners')->name('banners.')->group(function(){
-        Route::get('/',[BannerController::class,'index'])->name('index');
+    Route::prefix('/banners')->name('banners.')->group(function () {
+        Route::get('/', [BannerController::class, 'index'])->name('index');
         Route::get('/add', [BannerController::class, 'create'])->name('add');
         Route::post('/store', [BannerController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [BannerController::class, 'show'])->name('edit');
@@ -89,8 +94,8 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/add-to-cart/{id}', [UserProductController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/show-cart', [UserProductController::class, 'showCart'])->name('show-cart');
     Route::delete('/delete-cart/{id}', [UserProductController::class, 'deleteCart'])->name('delete-cart');
-    Route::get('/contact-us',[UserContactController::class,'index'])->name('contact-us');
-    Route::post('/contact-us',[UserContactController::class,'postContact'])->name('post-contact-us');
+    Route::get('/contact-us', [UserContactController::class, 'index'])->name('contact-us');
+    Route::post('/contact-us', [UserContactController::class, 'postContact'])->name('post-contact-us');
     Route::get('/wishlist_all', [wishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist', [wishlistController::class, 'wishlistAdd'])->name('wishlist.add');
     Route::delete('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');

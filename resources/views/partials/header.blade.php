@@ -38,10 +38,17 @@
     </div>
 
     <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-
         <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src='{{ asset('images/user.png') }}' alt="" id="output" class="rounded-circle"
-                style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+            @if (session()->has('user_id') && session()->has('image'))
+                @php
+                    $image = session('image');
+                @endphp
+                <img src='{{ $image }}' alt="" id="output" class="rounded-circle"
+                    style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+            @else
+                <img src='{{ asset('images/user.png') }}' alt="" id="output" class="rounded-circle"
+                    style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+            @endif
         </a>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

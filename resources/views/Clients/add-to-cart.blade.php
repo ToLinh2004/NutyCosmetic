@@ -1,7 +1,6 @@
 @extends('layouts.masterLayoutClient')
 @section('content')
     <section class="shoppingcart-page">
-        <form action="" method=" ">
             <div class="container">
                 <table class="table table-bordered mt-4">
                     <thead>
@@ -37,9 +36,8 @@
                                     <form action="{{ route('user.delete-cart', ['id' => $cartItem['product_id'] ]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <div class="button_x">
-                                            <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
-                                        </div>
+                                        <input type="number" name="id" value="" class="d-none">
+                                        <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
                                     </form>
                                 </div>
                             </td>
@@ -63,7 +61,6 @@
                     <a class="btn btn-primary" href="{{ route('user.checkout') }}" style="width: 100px;">Checkout</a>
                 </div>
             </div>
-        </form>
     </section>
     <script>
         function updateTotal(input) {
