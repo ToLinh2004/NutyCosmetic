@@ -27,7 +27,7 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $cartItem['name'] }}</td>
-                            <td><img src="{{ $cartItem['image'] }}" alt="" style="width:150px;height:140px;"></td>
+                            <td><img src="{{  asset($cartItem['image'])}}" alt="" style="width:150px;height:140px;"></td>
                             <td><input type="number" value="{{ $cartItem['quantity'] }}" min="1" max="{{ $quantities[$cartItem['product_id']] }}" onchange="updateTotal(this)"></td>
                             <td>{{ $cartItem['price'] }}</td>
                             <td class="total">{{ $total }}</td>

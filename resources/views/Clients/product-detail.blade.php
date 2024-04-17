@@ -34,7 +34,7 @@
                                  @endif
                                     <a class="text-decoration-none"
                                         href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
-                                        <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
+                                        <img src="{{ asset($product->image_url) }}" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product->product_name }}</h5>
@@ -47,6 +47,13 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="wishlist_ab">
+                                <form action="{{route('user.wishlist.add')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button style="submit"><i class="fa-regular fa-heart"></i></button>
+                                </form>
+                            </div>
                         </div>
                     {{-- @endif --}}
                 @endforeach
@@ -66,7 +73,7 @@
                                     @endif
                                     <a class="text-decoration-none"
                                         href="{{ route('user.product-detail', ['id' => $product->id ,'category_id'=>$product->category_id]) }}">
-                                        <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
+                                        <img src="{{ asset($product->image_url) }}" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product->product_name }}</h5>
@@ -79,6 +86,13 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="wishlist_ab">
+                                <form action="{{route('user.wishlist.add')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button style="submit"><i class="fa-regular fa-heart"></i></button>
+                                </form>
+                            </div>
                         </div>
                         <div id="notification" style="display: none;"></div>
 

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">
     <link rel="stylesheet" href="{{ asset('css/user-profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/wishlist.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
     <link rel="stylesheet" href="{{ asset('js/home.js') }}">
     <link rel="stylesheet" href="{{asset('css/wishlist.css')}}">
     <link href="{{asset('css/tiny-slider.css')}}" rel="stylesheet">
