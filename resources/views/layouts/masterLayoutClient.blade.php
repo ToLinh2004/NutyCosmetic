@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/wishlist.css') }}">
 
     <link rel="stylesheet" href="{{ asset('js/home.js') }}">
+    <link rel="stylesheet" href="{{asset('css/wishlist.css')}}">
     <link href="{{asset('css/tiny-slider.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href=" https://www.w3schools.com/w3css/4/w3.css">

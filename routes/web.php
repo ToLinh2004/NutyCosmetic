@@ -40,9 +40,7 @@ Route::get('/user_order', [UserDashboardOrderController::class, 'index'])->name(
 
 Route::get('/logout_session', [UserDashboardUserController::class, 'destroy_session'])->name('logout_session');
 Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('Admin.Adminhomepage');
-    })->name('Homepage');
+    Route::get('/', function () { return view('Admin.Adminhomepage'); })->name('Homepage');
     // user
     Route::prefix('/user')->name('user.')->group(function () {
         Route::get('/', [AdminUserController::class, 'index'])->name('index');

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User\Categories;
 use App\Models\User\Products;
+use App\Models\Banner;
+
 
 class CategoriesController extends Controller
 {
@@ -18,9 +20,10 @@ class CategoriesController extends Controller
         $this->products=new Products;
     }
     public function getCategoryDetail($id)
-    {  
+    {
+        $banners = Banner::all();
         $typeCategory=$this->categories->getCategoryDetail($id);
         $products =$this->products->getCategory($typeCategory);
-        return view('Clients.categories', compact('typeCategory','products'));
+        return view('Clients.categories', compact('banners','typeCategory','products'));
     }
 }

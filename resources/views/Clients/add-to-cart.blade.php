@@ -1,7 +1,6 @@
 @extends('layouts.masterLayoutClient')
 @section('content')
     <section class="shoppingcart-page">
-        <form action="" method=" ">
             <div class="container">
                 <table class="table table-bordered mt-4">
                     <thead>
@@ -33,14 +32,16 @@
                                 <td><input type="number" value= '{{ $cartItem['quantity'] }}' min='1'></td>
                                 <td>{{ $cartItem['price'] }}</td>
                                 <td>{{$total}}</td>
+                                @php
+                                    $id= $cartItem['product_id']
+                                @endphp
                                 <td colspan='2' style="padding-top: 60px">
                                     <div style="display:flex">
-                                    <form action="{{route('user.delete-cart', ['id' => $cartItem['product_id'] ])}}" method="POST">
+                                    <form action="{{route('user.delete-cart',$id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <div class="button_x">
-                                            <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
-                                        </div>
+                                        <input type="number" name="id" value="{{$id}}" class="d-none">
+                                        <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
                                     </form>
                                     <form action="">
                                         <div>
@@ -71,6 +72,5 @@
                     <a class="btn btn-primary" href="" style="width: 100px;">Checkout</a>
                 </div>
             </div>
-        </form>
     </section>
 @endsection;

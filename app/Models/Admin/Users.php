@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Attribute\ValueResolver;
 class Users extends Model {
     use HasFactory;
     protected $table = 'users';
+    public $timestamps = false;
     public function getAllUser($perPage = 0) {
         $users = DB::table('users')
             ->select('users.*')
@@ -38,5 +39,8 @@ class Users extends Model {
         return DB::table($this->table)
             ->where('id', $id)
             ->update(['status' => 'Inactive']);
+    }
+    public function countUser(){
+        return DB::table($this->table)->count();
     }
 }

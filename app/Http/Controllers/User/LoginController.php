@@ -21,6 +21,9 @@ class LoginController extends Controller {
         $email = $request->input('email');
         $password = $request->input('password');
         $user = Users::where('email', $email)->first();
+        if ($user->status === 'inactive') {
+            return redirect()->back()->with('error', 'Tài khoản của bạn đang bị vô hiệu hóa.');
+        }   
         $userPass = Users::where('password', $password)->first();
         if (!$user) {
             return redirect()->back()->with('error', 'Email invalid');
