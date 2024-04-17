@@ -72,7 +72,7 @@ Profile
                                     @php
                                     $id = $userId;
                                 @endphp
-                                <form action="{{ route('profile.update', ['id' => $id]) }}" method="post" id="contact-form" class="form-horizontal">
+                                <form action="{{ route('profile.update', ['id' => $id]) }}" method="post" id="contact-form" class="form-horizontal" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-content"
                                         style="border: unset;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
@@ -89,6 +89,15 @@ Profile
                                            
                                                 <div class="contact-form-group"
                                                     style="grid-template-columns: unset;grid-gap: unset;">
+                                                    <div class="form-field m-1">
+                                                        <img src="{{ asset($image) }}" alt="" width="100">
+                                                        <label for="image">Image (*)</label>
+                                                        <input type="file" id="image"
+                                                            name="image" class="form-control"
+                                                            value="{{ $image }}"
+                                                            placeholder="Please enter your image."
+                                                            required oninput="sanitizeInput(this)">
+                                                    </div>
                                                     <div class="form-field m-1">
                                                         <label for="email">Email (*)</label>
                                                         <input type="email" id="email"
