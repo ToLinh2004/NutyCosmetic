@@ -4,57 +4,46 @@
             <div class="container">
                 <table class="table table-bordered mt-4">
                     <thead>
-                        <tr >
+                        <tr>
                             <th>STT</th>
                             <th>Product Name</th>
-                            <th  width='20%'>Image</th>
-                            <th  width='10%' >Quantity</th>
-                            <th  width='15%'>Unit Price</th>
+                            <th width='20%'>Image</th>
+                            <th width='10%'>Quantity</th>
+                            <th width='15%'>Unit Price</th>
                             <th width='15%'>Total</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
-                         $total = 0;
-                         $stt = 0;
                             $totalAll = 0;
+                            $index = 0;
                         @endphp
-                        @foreach ($carts as $cartItem)
+                        @foreach ($carts as $index => $cartItem)
                         @php
-                         $total = $cartItem['price'] * $cartItem['quantity'];
+                            $total = $cartItem['price'] * $cartItem['quantity'];
                             $totalAll += $total;
                         @endphp
-                            <tr>
-                                <td>{{$stt +1}}</td>
-                                <td>{{ $cartItem['name'] }}</td>
-                                <td><img src="{{ $cartItem['image'] }}" alt="" style="width:150px;height:140px;"></td>
-                                <td><input type="number" value= '{{ $cartItem['quantity'] }}' min='1'></td>
-                                <td>{{ $cartItem['price'] }}</td>
-                                <td>{{$total}}</td>
-                                @php
-                                    $id= $cartItem['product_id']
-                                @endphp
-                                <td colspan='2' style="padding-top: 60px">
-                                    <div style="display:flex">
-                                    <form action="{{route('user.delete-cart',$id)}}" method="post">
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $cartItem['name'] }}</td>
+                            <td><img src="{{ $cartItem['image'] }}" alt="" style="width:150px;height:140px;"></td>
+                            <td><input type="number" value="{{ $cartItem['quantity'] }}" min="1" max="{{ $quantities[$cartItem['product_id']] }}" onchange="updateTotal(this)"></td>
+                            <td>{{ $cartItem['price'] }}</td>
+                            <td class="total">{{ $total }}</td>
+                            <td colspan='2' style="padding-top: 60px">
+                                <div style="display:flex">
+                                    <form action="{{ route('user.delete-cart', ['id' => $cartItem['product_id'] ]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="number" name="id" value="{{$id}}" class="d-none">
+                                        <input type="number" name="id" value="" class="d-none">
                                         <button type="submit" style="border: none;background-color:white;"><i class='fa-solid fa-trash' style="padding-right:20px;padding-left:15px"></i></button>
                                     </form>
-                                    <form action="">
-                                        <div>
-                                            <button type="submit" style="border: none;background-color:white;"><i class="fa-solid fa-pen"></i></button>
-                                        </div>
-                                    </form>
                                 </div>
-                                </td>
-                            </tr>
-                            @php
-                            $stt++;
-                            @endphp
-                        @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                    
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
@@ -65,12 +54,41 @@
                 <div>
                     <div class="d-flex justify-content-end">
                         <pre>Total:                             </pre>
-                        <p>{{$totalAll}}</p>
+                        <p id="totalAll">{{ $totalAll }}</p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-primary" href="" style="width: 100px;">Checkout</a>
+                    <a class="btn btn-primary" href="{{ route('user.checkout') }}" style="width: 100px;">Checkout</a>
                 </div>
             </div>
     </section>
-@endsection;
+    <script>
+        function updateTotal(input) {
+            var quantity = parseInt(input.value);
+            var min = parseInt(input.min);
+            var max = parseInt(input.max);
+            var unitPrice = parseFloat(input.parentNode.nextElementSibling.textContent);
+            var totalElement = input.parentNode.nextElementSibling.nextElementSibling;
+            
+            if (quantity < min || quantity > max || isNaN(quantity)) {
+                alert("Quantity must be between " + min + " and " + max);
+                input.value = input.dataset.oldValue || min;
+                return;
+            }
+            
+            var total = parseFloat(quantity) * unitPrice;
+            totalElement.textContent = total.toFixed(2);
+            input.dataset.oldValue = input.value;
+            updateTotalAll();
+        }
+
+        function updateTotalAll() {
+            var totalAll = 0;
+            var totalElements = document.querySelectorAll('.total');
+            totalElements.forEach(function(element) {
+                totalAll += parseFloat(element.textContent);
+            });
+            document.getElementById('totalAll').textContent = totalAll.toFixed(2);
+        }
+    </script>
+@endsection

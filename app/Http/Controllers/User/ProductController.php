@@ -87,8 +87,10 @@ class ProductController extends Controller {
 
         $userId = Session::get('user_id');
         $carts = session()->get('cart_userId'.$userId, []);
-        return view('Clients.add-to-cart', compact('carts'));
+        $quantities = products::whereIn('id', array_keys($carts))->pluck('quantity', 'id')->toArray();
+        return view('Clients.add-to-cart', compact('carts', 'quantities'));
     }
+    
     public function deleteCart($id)
         {
             if (Session::has('user_id')) {
@@ -102,4 +104,9 @@ class ProductController extends Controller {
             }
     }
 
+    public function checkout(){
+        $userId = Session::get('user_id');
+        $carts = session()->get('cart_userId'.$userId, []);
+        return view('Clients.checkout', compact('carts'));
+    }
 }

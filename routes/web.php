@@ -97,4 +97,5 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/wishlist_all', [wishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist', [wishlistController::class, 'wishlistAdd'])->name('wishlist.add');
     Route::delete('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    Route::get('/checkout',[UserProductController::class, 'checkout'])->name('checkout');
 });
