@@ -44,7 +44,7 @@
                              @endif
                             <a class="text-decoration-none"
                                 href="{{ route('user.product-detail', ['id' => $product->id, 'category_id' => $product->category_id]) }}">
-                                <img src="{{ $product->image_url }}" class="card-img-top" alt="...">
+                                <img src="{{ asset($product->image_url) }}" class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->product_name }}</h5>
@@ -57,7 +57,7 @@
 
                                     <input type="hidden" name="PId" value="{{ $product->id }}">
                                     <input type="hidden" name="PName" value="{{ $product->product_name }}">
-                                    <input type="hidden" name="Image" value="{{ $product->image_url }}">
+                                    <input type="hidden" name="Image" value="{{ asset($product->image_url) }}">
                                     <input type="hidden" name="PPrice" value="{{ $product->price }}">
                                     <input type="hidden" name="addcart" value="order">
                                 </div>

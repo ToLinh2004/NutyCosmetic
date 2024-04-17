@@ -88,7 +88,7 @@ $user_id = Session::get('user_id')
                                         $totalAll += $total;
                                     @endphp
                                         <tr>
-                                            <th scope="row"><img src="{{ $cartItem['image'] }}" alt="product-img" title="product-img" style="width: 200px"></th>
+                                            <th scope="row"><img src="{{ asset($cartItem['image']) }}" alt="product-img" title="product-img" style="width: 200px"></th>
                                             <td>
                                                 <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{ $cartItem['name'] }}</a></h5>
 

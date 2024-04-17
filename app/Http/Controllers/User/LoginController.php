@@ -23,11 +23,11 @@ class LoginController extends Controller {
         $user = Users::where('email', $email)->first();
         if ($user->status === 'inactive') {
             return redirect()->back()->with('error', 'Tài khoản của bạn đang bị vô hiệu hóa.');
-        }   
-        $userPass = Users::where('password', $password)->first();
+        }  
         if (!$user) {
             return redirect()->back()->with('error', 'Email invalid');
-        }
+        } 
+        $userPass = Users::where('password', $password)->first();
         if ($userPass) {
             Session::put('user_id', $user->id);
             Session::put('email', $user->email);
@@ -73,12 +73,12 @@ class LoginController extends Controller {
         );
         $imageName = time() . '.' . $request->image->extension();
         $dataInsert = [
-            $request->user_name,
-            $request->email,
-            $request->phone,
-            $request->password,
-            $request->address,
-            $request->image->move('images', $imageName)
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => $request->password,
+            'address' => $request->address,
+            'image' => $request->image->move('images', $imageName)
         ];
         $this->users->addUser($dataInsert);
         return redirect()->route('loginUser')->with('msg', 'Register successfully.');
