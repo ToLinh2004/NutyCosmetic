@@ -40,4 +40,7 @@ class Users extends Model {
             ->where('id', $id)
             ->update(['status' => 'Inactive']);
     }
+    public function countUser(){
+        return DB::table($this->table)->count();
+    }
 }

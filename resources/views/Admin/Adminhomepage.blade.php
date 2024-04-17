@@ -10,7 +10,7 @@
                     <strong style="font-size: 18px">
                         <p>Users</p>
                     </strong>
-                    <h3>Total: </h3>
+                    <h3>Total: {{ \App\Models\Admin\Users::where('status', 'active')->count() }} </h3>
                 </div>
             </div>
             <div class="col-5">
@@ -18,7 +18,7 @@
                     <strong style="font-size: 18px">
                         <p>Products</p>
                     </strong>
-                    <h3>Total: </h3>
+                    <h3>Total: {{ \App\Models\Admin\Products::where('status', 'active')->count() }} </h3>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <strong style="font-size: 18px">
                         <p>Orders</p>
                     </strong>
-                    <h3>Total: </h3>
+                    <h3>Total: {{ \App\Models\Admin\Orders::count() }} </h3>
                 </div>
             </div>
             <div class="col-5">
@@ -36,7 +36,7 @@
                     <strong style="font-size: 18px">
                         <p>Categories</p>
                     </strong>
-                    <h3>Total: </h3>
+                    <h3>Total: {{ \App\Models\Admin\Categories::where('status', 'active')->count() }}  </h3>
                 </div>
             </div>
         </div>
