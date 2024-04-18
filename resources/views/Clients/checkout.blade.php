@@ -20,6 +20,7 @@ $user_id = Session::get('user_id')
                                     <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
                                     <div class="mb-3">
                                         <form method="post" action="{{ route('user.checkout-success') }}">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
@@ -50,42 +51,6 @@ $user_id = Session::get('user_id')
                                         </form>
                                     </div>
                                 </div>
-                                <div class="feed-item-list">
-                                    <div>
-                                        <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
-                                        <div class="mb-3">
-                                            <form method="post" action="#">
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="billing-name">Tên</label>
-                                                            <input type="text" name="billing-name" class="form-control" id="billing-name" value="{{Session::get('user_name') }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="billing-email-address">Email</label>
-                                                            <input type="email" name="billing-email-address" class="form-control" id="billing-email-address" value="{{ Session::get('email') }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="billing-phone">Số điện thoại</label>
-                                                            <input type="text" class="form-control" name="billing-phone" id="billing-phone" value="{{ Session::get('phone') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="billing-address">Địa chỉ</label>
-                                                    <textarea class="form-control" id="billing-address" name="shipping_address" rows="3" placeholder="Nhập địa chỉ đầy đủ"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="mdi mdi-cart-outline me-1"></i> Hoàn tất
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                         </ol>
                     </div>
@@ -97,7 +62,7 @@ $user_id = Session::get('user_id')
                     </div>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <div class="card checkout-order-summary">
                     <div class="card-body">
                         <div class="p-3 bg-light mb-3">

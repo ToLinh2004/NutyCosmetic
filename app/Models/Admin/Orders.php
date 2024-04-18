@@ -11,7 +11,13 @@ class Orders extends Model {
     
     protected $table = 'orders';
     public $timestamps = false;
-
+    protected $fillable = [
+        'user_id',
+        'order_status_id',
+        'total_price',
+        'date',
+        'payment_method'
+    ];
     public function user() {
         return $this->belongsTo(Users::class, 'user_id');
     }

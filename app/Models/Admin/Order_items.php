@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order_items extends Model {
     use HasFactory;
-
+    public $timestamps = false;
+    public $fillable = [
+        'order_id', 'product_id', 'quantity', 'unit_price', 'image_url'
+    ];
     public function order_user() {
         return $this->belongsTo(Products::class, 'product_id');
     }
