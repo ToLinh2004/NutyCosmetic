@@ -13,7 +13,7 @@
                 @php
                     $image = session('image');
                 @endphp
-                <img src='{{ $image }}' alt="" id="output" class="rounded-circle"
+                <img src='{{ asset($image) }}' alt="" id="output" class="rounded-circle"
                     style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
             @else
                 <img src='{{ asset('images/user.png') }}' alt="" id="output" class="rounded-circle"
