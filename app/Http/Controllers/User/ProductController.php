@@ -90,7 +90,7 @@ class ProductController extends Controller {
         $quantities = products::whereIn('id', array_keys($carts))->pluck('quantity', 'id')->toArray();
         return view('Clients.add-to-cart', compact('carts', 'quantities'));
     }
-    
+
     public function deleteCart($id)
         {
             if (Session::has('user_id')) {
