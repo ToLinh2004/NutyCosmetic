@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Odder_items;
 use App\Models\Admin\Orders;
+use App\Models\Admin\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\Admin\Users;
 use App\Models\Admin\Products;
@@ -33,7 +35,7 @@ class CheckoutController extends Controller
     $data = [];
 
     if (!empty($queryParams)) {
-        $user_id = session('user.id');
+        $user_id = session('user_id');
 
         $current = new DateTime();
         $currentFormatted = $current->format('Y-m-d');
@@ -74,7 +76,7 @@ class CheckoutController extends Controller
                 session()->forget('cart');
 
                 foreach ($productModel as $product) {
-                    OrderItem::create([
+                    Odder_items::create([
                         'order_id' => $order->id,
                         'product_id' => $product['product_id'],
                         'quantity' => $product['quantity'],
