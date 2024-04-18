@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \App\Models\Product;
+use \App\Models\Products;
 
 class ProductController extends Controller
 {
@@ -12,7 +12,7 @@ class ProductController extends Controller
     private $products;
     public function __construct()
     {
-        $this->products = new Product();
+        $this->products = new Products();
     }
     
     public function index()

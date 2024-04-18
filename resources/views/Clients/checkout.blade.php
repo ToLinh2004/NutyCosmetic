@@ -14,14 +14,14 @@
                             </div>
                             <div class="feed-item-list">
                                 <div>
-                                    <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
+                                    <h5 class="font-size-16 mb-1">Payment Information</h5>
                                     <div class="mb-3">
                                         <form id="checkout-form" method="post" action="{{ route('user.checkout-success') }}">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="billing-name">Tên</label>
+                                                        <label class="form-label" for="billing-name">Name</label>
                                                         <input type="text" name="billing-name" class="form-control" id="billing-name" value="{{Session::get('user_name') }}">
                                                     </div>
                                                 </div>
@@ -33,14 +33,14 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="billing-phone">Số điện thoại</label>
+                                                        <label class="form-label" for="billing-phone">Phone</label>
                                                         <input type="text" class="form-control" name="billing-phone" id="billing-phone" value="{{ Session::get('phone') }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label" for="billing-address">Địa chỉ</label>
-                                                <textarea class="form-control" id="billing-address" name="shipping_address" rows="3" placeholder="Nhập địa chỉ đầy đủ"></textarea>
+                                                <label class="form-label" for="billing-address">Address</label>
+                                                <textarea class="form-control" id="billing-address" name="shipping_address" rows="3" placeholder="Enter full address"></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-success">
                                                 <i class="mdi mdi-cart-outline me-1">Complete</i> 
@@ -58,15 +58,15 @@
                 <div class="card checkout-order-summary">
                     <div class="card-body">
                         <div class="p-3 bg-light mb-3">
-                            <h5 class="font-size-16 mb-0">Thông tin đơn hàng</h5>
+                            <h5 class="font-size-16 mb-0">Order Information</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-centered mb-0 table-nowrap">
                                 <thead>
                                     <tr>
-                                        <th class="border-top-0" style="width: 110px;" scope="col">Sản phẩm</th>
-                                        <th class="border-top-0" scope="col">Mô tả sản phẩm</th>
-                                        <th class="border-top-0" scope="col">Giá</th>
+                                        <th class="border-top-0" style="width: 110px;" scope="col">Product</th>
+                                        <th class="border-top-0" scope="col">Product Description</th>
+                                        <th class="border-top-0" scope="col">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +92,7 @@
     
                                     <tr>
                                         <td colspan="2">
-                                            <h5 class="font-size-14 m-0">Tổng thu :</h5>
+                                            <h5 class="font-size-14 m-0">Subtotal :</h5>
                                         </td>
                                         <td>
                                             {{ $totalAll }} VNĐ
@@ -100,7 +100,7 @@
                                     </tr>
                                     <tr class="bg-light">
                                         <td colspan="2">
-                                            <h5 class="font-size-14 m-0">Tổng thanh toán:</h5>
+                                            <h5 class="font-size-14 m-0">Total Payment:</h5>
                                         </td>
                                         <td>
                                             {{ $totalAll }} VNĐ
