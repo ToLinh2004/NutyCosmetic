@@ -21,14 +21,22 @@
                         @endphp
                         @foreach ($carts as $index => $cartItem)
                         @php
-                            $total = $cartItem['price'] * $cartItem['quantity'];
+                            $price = floatval($cartItem['price']);
+                            $quantity = intval($cartItem['quantity']);
+                            $total = $price * $quantity;
                             $totalAll += $total;
                         @endphp
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $cartItem['name'] }}</td>
                             <td><img src="{{ $cartItem['image'] }}" alt="" style="width:150px;height:140px;"></td>
-                            <td><input type="number" value="{{ $cartItem['quantity'] }}" min="1" max="{{ $quantities[$cartItem['product_id']] }}" onchange="updateTotal(this)"></td>
+                            <td>
+                                <form action="{{ route('user.update-cart', ['id' => $cartItem['product_id']]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="number" name="quantity" value="{{ $cartItem['quantity'] }}" min="1" max="{{ $quantities[$cartItem['product_id']] }}" onchange="this.form.submit()">
+                                </form>
+                            </td>
                             <td>{{ $cartItem['price'] }}</td>
                             <td class="total">{{ $total }}</td>
                             <td colspan='2' style="padding-top: 60px">
@@ -53,8 +61,8 @@
                 </div>
                 <div>
                     <div class="d-flex justify-content-end">
-                        <pre>Total:                             </pre>
-                        <p id="totalAll">{{ $totalAll }}</p>
+                        <span id="totalAll"> Total: {{ $totalAll }} VND</span>
+                        
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -62,33 +70,5 @@
                 </div>
             </div>
     </section>
-    <script>
-        function updateTotal(input) {
-            var quantity = parseInt(input.value);
-            var min = parseInt(input.min);
-            var max = parseInt(input.max);
-            var unitPrice = parseFloat(input.parentNode.nextElementSibling.textContent);
-            var totalElement = input.parentNode.nextElementSibling.nextElementSibling;
-            
-            if (quantity < min || quantity > max || isNaN(quantity)) {
-                alert("Quantity must be between " + min + " and " + max);
-                input.value = input.dataset.oldValue || min;
-                return;
-            }
-            
-            var total = parseFloat(quantity) * unitPrice;
-            totalElement.textContent = total.toFixed(2);
-            input.dataset.oldValue = input.value;
-            updateTotalAll();
-        }
-
-        function updateTotalAll() {
-            var totalAll = 0;
-            var totalElements = document.querySelectorAll('.total');
-            totalElements.forEach(function(element) {
-                totalAll += parseFloat(element.textContent);
-            });
-            document.getElementById('totalAll').textContent = totalAll.toFixed(2);
-        }
-    </script>
+    
 @endsection

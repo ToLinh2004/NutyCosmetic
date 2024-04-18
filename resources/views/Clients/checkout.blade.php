@@ -19,7 +19,7 @@ $user_id = Session::get('user_id')
                                 <div>
                                     <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
                                     <div class="mb-3">
-                                        <form method="post" action="#">
+                                        <form method="post" action="{{ route('user.checkout-success') }}">
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">

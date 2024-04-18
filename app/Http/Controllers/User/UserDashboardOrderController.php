@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Users;
 use App\Models\Admin\Orders;
-use App\Models\Admin\Odder_items;
+use App\Models\Admin\Order_items;
 
 use Illuminate\Support\Facades\Session;
 
@@ -22,7 +22,7 @@ class UserDashboardOrderController extends Controller {
         $user_orders_items = [];
 
         foreach ($user_orders as $order) {
-            $order_items = Odder_items::where('order_id', $order->id)->get();
+            $order_items = Order_items::where('order_id', $order->id)->get();
             $user_orders_items[$order->id] = $order_items;
         }
 
