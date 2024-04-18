@@ -104,4 +104,5 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/checkout',[UserCheckoutController::class, 'checkout'])->name('checkout');
     Route::put('/update-cart/{id}', [UserCheckoutController::class, 'updateCart'])->name('update-cart');
     Route::post('/checkout/success', [UserCheckoutController::class, 'checkoutSuccess'])->name('checkout-success');
+    
 });
