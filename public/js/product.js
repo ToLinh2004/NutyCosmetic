@@ -15,8 +15,12 @@ $(function () {
             error: function (xhr, status, error) {
                 if (xhr.status === 404) {
                     alert("Product does not exist");
-                } else {
-                    alert("Error occurred");
+                } 
+                if (xhr.status === 409) {
+                    alert("Product already exists in the cart");
+                }
+                if (xhr.status === 400) {
+                    alert("You need to log in");
                 }
             },
         });

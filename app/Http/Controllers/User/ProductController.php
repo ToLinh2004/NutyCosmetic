@@ -46,7 +46,6 @@ class ProductController extends Controller {
         if (Session::has('user_id')) {
             $userId = Session::get('user_id');
             $product = $this->products->getAddToCart($id);
-
         if (!$product) {
             return response()->json([
                 'code' => 404,
@@ -65,7 +64,10 @@ class ProductController extends Controller {
             $cart = session()->get('cart_userId'.$userId, []);
 
             if (isset($cart[$id])) {
-                $cart[$id]['quantity'] += 1;
+                return response()->json([
+                    'code' => 409,
+
+                ], 409);
             } else {
                 $cart[$id] = [
                     'product_id' => $product->id,
@@ -80,6 +82,11 @@ class ProductController extends Controller {
             return response()->json([
                 'code' => 200,
             ], 200);
+        }
+        else{
+            return response()->json([
+                'code' => 400,
+            ], 400);
         }
     }
 
@@ -102,11 +109,5 @@ class ProductController extends Controller {
                     return redirect()->route('user.show-cart');
                 }
             }
-    }
-
-    public function checkout(){
-        $userId = Session::get('user_id');
-        $carts = session()->get('cart_userId'.$userId, []);
-        return view('Clients.checkout', compact('carts'));
     }
 }
