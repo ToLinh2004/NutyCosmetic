@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -14,19 +15,7 @@ use App\Http\Controllers\User\BannerController;
 use App\Http\Controllers\User\UserDashboardOrderController;
 use App\Http\Controllers\User\ContactController as UserContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 Route::get('/', [UserProductController::class, 'home'])->name('home');
 Route::get('/registerUser', [UserLoginController::class, 'create'])->name('registerUser');
 Route::post('/registerUser', [UserLoginController::class, 'store'])->name('storeUser');
@@ -39,6 +28,7 @@ Route::post('/profile/update/{id}', [UserDashboardUserController::class, 'update
 Route::get('/user_order', [UserDashboardOrderController::class, 'index'])->name('dashboard.order');
 
 Route::get('/logout_session', [UserDashboardUserController::class, 'destroy_session'])->name('logout_session');
+
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', function () { return view('Admin.Adminhomepage'); })->name('Homepage');
     // user
@@ -83,7 +73,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::post('/update', [BannerController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [BannerController::class, 'destroy'])->name('delete');
     });
-});
+})->middleware('admin');
 Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/home', [UserProductController::class, 'home'])->name('home');
     Route::get('/product', [UserProductController::class, 'getAllProduct'])->name('all-product');
@@ -98,4 +88,5 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::post('/wishlist', [wishlistController::class, 'wishlistAdd'])->name('wishlist.add');
     Route::delete('wishlist/remove-product/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
     Route::get('/checkout',[UserProductController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'checkoutSuccess'])->name('checkoutSuccess');
 });

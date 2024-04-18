@@ -7,44 +7,51 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Admin\Users;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
-
 class LoginController extends Controller {
     private $users;
     public function __construct() {
         $this->users = new Users();
     }
-
     public function showLogin() {
         return view('FE/pages/auth/login');
     }
     public function loginUser(Request $request) {
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $user = Users::where('email', $email)->first();
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $email = $validatedData['email'];
+        $password = $validatedData['password'];
+        $user = Users::where('email', $email)->first();    
+        if (!$user) {
+            return redirect()->back()->with('error', 'Email not found');
+        } 
         if ($user->status === 'inactive') {
             return redirect()->back()->with('error', 'Tài khoản của bạn đang bị vô hiệu hóa.');
-        }  
-        if (!$user) {
-            return redirect()->back()->with('error', 'Email invalid');
-        } 
-        $userPass = Users::where('password', $password)->first();
-        if ($userPass) {
-            Session::put('user_id', $user->id);
-            Session::put('email', $user->email);
-            Session::put('user_name', $user->user_name);
-            Session::put('phone', $user->phone);
-            Session::put('image', $user->image);
-            Session::put('address', $user->address);
-            Session::put('role', $user->role);
-            if ($user->role == 'admin') return redirect()->route('admin.Homepage')->with('msg', 'Login successful');
-            return redirect()->route('home');
-        } else return redirect()->back()->with('error', 'Password incorrect');
+        }
+        if ($user->password === $password) {
+            session([
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'user_name' => $user->user_name,
+                'phone' => $user->phone,
+                'image' => $user->image,
+                'address' => $user->address,
+                'status' => $user->status,
+                'role' => $user->role,
+            ]);
+            if ($user->role == 'admin') {
+                return redirect()->route('admin.Homepage')->with('msg', 'Login successful');
+            } else {
+                return redirect()->route('home');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Password incorrect');
+        }
     }
-
     public function create() {
         return view('FE/pages/auth/register');
     }
-
     public function store(Request $request) {
         $request->validate(
             [
