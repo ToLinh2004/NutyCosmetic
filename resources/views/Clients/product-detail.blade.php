@@ -14,7 +14,7 @@
                 </div>
                 <div class="product-price-btn d-flex">
                     <a href="{{ route('user.add-to-cart', ['id' => $productDetail->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $productDetail->id]) }}" style="padding-left: 10px;border-radius: 25px;  width:150px; height:50px;">Add to cart</a>
-                    <a href="" class="btn btn-success add-to-cart" style="padding-left: 10px;border-radius: 25px;  width:150px; height:50px; margin-left:50px ;">Buy now</a>
+                   
 
                 </div>
             </div>
@@ -41,8 +41,7 @@
                                         <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                         <div>
                                             <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
-                                            <a href=""><button type="submit" class="btn btn-success">Buy
-                                                    now</button></a>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -80,9 +79,7 @@
                                         <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                         <div>
                                             <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
-                                            <a href=""><button type="submit" class="btn btn-success">Buy
-                                                    now</button></a>
-                                        </div>
+                                            
                                     </div>
                                 </div>
                             </form>

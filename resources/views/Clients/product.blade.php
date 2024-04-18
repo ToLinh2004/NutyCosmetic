@@ -51,10 +51,6 @@
                                 <p class="card-text text-truncate--2">{{ $product->price }}</p>
                                 <div>
                                     <a href="{{ route('user.add-to-cart', ['id' => $product->id]) }}" class="btn btn-success add-to-cart" data-url="{{ route('user.add-to-cart', ['id' => $product->id]) }}">Add to cart</a>
-                                    <a href="#">
-                                        <button type="submit" class="btn btn-success">Buy now</button>
-                                    </a>
-
                                     <input type="hidden" name="PId" value="{{ $product->id }}">
                                     <input type="hidden" name="PName" value="{{ $product->product_name }}">
                                     <input type="hidden" name="Image" value="{{ asset($product->image_url) }}">

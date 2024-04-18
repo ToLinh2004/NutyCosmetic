@@ -5,6 +5,11 @@ Profile
 
 @section('content')
 <div class="container">
+    @if(session('success'))
+        <div id="success-alert" class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
   <h3>Order details</h3>
   <table class="table">
     <thead>
@@ -74,6 +79,11 @@ Profile
     </tbody>
   </table>
 </div>
+<script>
+    setTimeout(function() {
+      document.getElementById('success-alert').style.display = 'none';
+    }, 3000);
+  </script>
 @endsection
 
 

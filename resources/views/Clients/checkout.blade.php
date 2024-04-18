@@ -1,8 +1,5 @@
 @extends('layouts.masterLayoutClient')
 @section('content')
-@php
-$user_id = Session::get('user_id')   
-@endphp
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -19,7 +16,7 @@ $user_id = Session::get('user_id')
                                 <div>
                                     <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
                                     <div class="mb-3">
-                                        <form method="post" action="{{ route('user.checkout-success') }}">
+                                        <form id="checkout-form" method="post" action="{{ route('user.checkout-success') }}">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-4">
@@ -46,7 +43,7 @@ $user_id = Session::get('user_id')
                                                 <textarea class="form-control" id="billing-address" name="shipping_address" rows="3" placeholder="Nhập địa chỉ đầy đủ"></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-success">
-                                                <i class="mdi mdi-cart-outline me-1"></i> Hoàn tất
+                                                <i class="mdi mdi-cart-outline me-1">Complete</i> 
                                             </button>
                                         </form>
                                     </div>
@@ -55,12 +52,7 @@ $user_id = Session::get('user_id')
                         </ol>
                     </div>
                 </div>
-                <div class="row my-4">
-                    <div class="col">
-                        <a href="?controller=product&action=index&page=customer" class="btn btn-link text-muted">
-                            <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
-                    </div>
-                </div>
+                
             </div>
             <div class="col-6">
                 <div class="card checkout-order-summary">
@@ -124,4 +116,5 @@ $user_id = Session::get('user_id')
     </div>
 </div>
     <script src="{{asset('js/product.js')}}"></script>
+  
 @endsection

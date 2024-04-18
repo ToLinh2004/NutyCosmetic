@@ -2,6 +2,11 @@
 @section('content')
     <section class="shoppingcart-page">
             <div class="container">
+                @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
                 <table class="table table-bordered mt-4">
                     <thead>
                         <tr>

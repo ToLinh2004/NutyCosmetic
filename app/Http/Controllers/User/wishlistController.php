@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class wishlistController extends Controller {
     public function index() {
-
         $blogWishlists = Wishlist::with('products')->get();
         return view('Clients.wishlist-product', compact('blogWishlists'));
     }
@@ -61,7 +60,7 @@ class wishlistController extends Controller {
 
         $wishlistProduct->delete();
 
-        toastr('Xóa bài viết yêu thích thành công!', 'success');
+        toastr()->success('Xóa bài viết yêu thích thành công!');
 
         return redirect()->back();
     }

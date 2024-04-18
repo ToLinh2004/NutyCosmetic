@@ -19,7 +19,7 @@
             </ul>
         </div>
     </div>
-    <a href="">About Us</a>
+   
     <a href="{{route('user.contact-us')}}">Contact Us</a>
 </nav>
 <div id="timkiem" class="col-3 p-2">
@@ -31,11 +31,14 @@
        <!-- kết quả tìm kiếm -->
     </div>
   </div>
+  
 <div class="icon-nav">
+    @if (session()->has('user_id'))
     <div class="item1">
         <a href="{{route('user.show-cart')}}"><i class="fa-solid fa-cart-shopping"
-                style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
+            style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
     </div>
+    @endif
 
     <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
