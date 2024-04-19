@@ -51,8 +51,7 @@
                             </li>
                         </ol>
                     </div>
-                </div>
-                
+                </div>     
             </div>
             <div class="col-6">
                 <div class="card checkout-order-summary">
@@ -116,5 +115,4 @@
     </div>
 </div>
     <script src="{{asset('js/product.js')}}"></script>
-  
 @endsection

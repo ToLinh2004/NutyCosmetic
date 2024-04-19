@@ -6,8 +6,6 @@
             <button type="button" data-bs-target="#demo" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></button>
         @endforeach
     </div>
-
-
     <div class="carousel-inner ">
         @if (!empty($banners))
             @foreach ($banners as $banner)
